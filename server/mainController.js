@@ -13,6 +13,7 @@ mainController = {
             res.status(500).send(err)
         })
     },
+
     getProductsInCart: function(req, res){
         const db = req.app.get('db');
         if(req.session.isLoggedIn){
@@ -28,6 +29,12 @@ mainController = {
             return res.status(200).send([])
         }
     },
+
+    isAdmin: (req, res) => {
+        let isAdmin = (req.session && req.session.isAdmin) ? true : false;
+        return res.status(200).send({isAdmin: isAdmin});
+    },
+
     login: function(req, res){
         
         const db = req.app.get('db');
@@ -54,9 +61,11 @@ mainController = {
             res.status(500).send(err)
         })        
     },
+
     loadCart: function(){
-        
+        // add load cart functionality here
     },
+
     addToCart: function(req, res){
         const db = req.app.get('db');        
         db.getCart([req.session.user])
@@ -79,6 +88,7 @@ mainController = {
             
         }).catch(err=>{});
     },
+
     addProduct: function(req, res){
         const db = req.app.get('db');
         
@@ -95,6 +105,7 @@ mainController = {
             res.status(500).send(err)
         })
     },
+
     deleteProduct: function(req, res){
         
         const db = req.app.get('db');
@@ -114,6 +125,7 @@ mainController = {
             res.status(500).send(err)
         })        
     },
+
     updateProduct: function(req, res){
         const db = req.app.get('db');
         if(req.session.isAdmin === false || !req.session.isAdmin){
