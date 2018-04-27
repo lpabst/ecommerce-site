@@ -16,7 +16,7 @@
     margin-top: 5px;
 }
 
-.mobileHeader{
+.mobileNav{
     width: 60px;
     height: 60px;
     display: none;
@@ -74,10 +74,10 @@
         position: absolute;
         left: calc(50% - 25px);
     }
-    .desktopHeader{
+    .desktopNav{
         display: none !important;
     }
-    .mobileHeader{
+    .mobileNav{
         display: block;
     }
     .rightMenu{

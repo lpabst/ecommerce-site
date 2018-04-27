@@ -64,13 +64,15 @@ class MainHeader extends Component {
                     <Link to='/'>
                         <img className='headerLogo' src={arrow} alt="" />
                     </Link>
-                    <div style={{ "width": "500px" }} className={`flexRow desktopHeader`}>
+
+                    <div style={{ "width": "500px" }} className={`flexRow desktopNav`}>
                         <Link to='/' className='navTextMedium'>PRODUCTS</Link>
                         <Link to='/community' className='navTextMedium'>COMMUNITY</Link>
                         <Link to='/support' className='navTextMedium'>SUPPORT</Link>
                         <Link to='/about' className='navTextMedium'>ABOUT</Link>
                     </div>
-                    <div className={`mobileHeader`}>
+
+                    <div className={`mobileNav`}>
                         <img className={`hamMenu`} src={hamMenu} alt='hamburger menu' onClick={(e)=>this.setState({showMobileDropdown: !this.state.showMobileDropdown})} />
 
                         { this.state.showMobileDropdown ? 
@@ -82,8 +84,8 @@ class MainHeader extends Component {
                             </div>
                         : null
                         }
-
                     </div>
+
                     <div className={`flexRow rightMenu`}>
                         {loginIcon}
                         <Link to='/cart'><img className='aLink' style={{ "height": "20px" }} src="https://d30y9cdsu7xlg0.cloudfront.net/png/5641-200.png" alt="" /></Link>
