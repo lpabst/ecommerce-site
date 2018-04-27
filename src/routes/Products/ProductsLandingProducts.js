@@ -38,7 +38,12 @@ class ProductsLandingProducts extends Component {
         let products;
         if (this.state.products.length) {
             products = this.state.products.map((product, i) => {
-                if (product.attributes.indexOf(this.props.attributeToShow) > -1) {
+
+                // creates a pattern (case doesn't matter) that we can match to filter products by category
+                let categoryFilterPattern = new RegExp(this.props.attributeToShow, 'i');
+                
+                // for each product, check if it's attributes contain the pattern we are matching
+                if (product.attributes.match(categoryFilterPattern)) {
                     return (
                         <div draggable="true" className='plpSingleProductWrapper' key={i}>
                             <img src={product.image} alt="" />
@@ -49,6 +54,7 @@ class ProductsLandingProducts extends Component {
                         </div>
                     )
                 }
+
             })
         }else if (this.state.loadingProducts){
             products = <div className='plpSingleProductWrapper'><h1>Loading Products...</h1></div>
