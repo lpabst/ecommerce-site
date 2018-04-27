@@ -63,9 +63,9 @@ class MainHeader extends Component {
                     </Link>
                     <div style={{ "width": "500px" }} className='flexRow'>
                         <Link to='/' className='navTextMedium'>PRODUCTS</Link>
-                        <Link to='/about' className='navTextMedium'>ABOUT</Link>
                         <Link to='/community' className='navTextMedium'>COMMUNITY</Link>
                         <Link to='/support' className='navTextMedium'>SUPPORT</Link>
+                        <Link to='/about' className='navTextMedium'>ABOUT</Link>
                     </div>
                     <div style={{ "width": "150px" }} className='flexRow'>
                         {loginIcon}
