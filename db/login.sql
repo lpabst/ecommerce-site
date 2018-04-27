@@ -1,3 +1,3 @@
-select * from users
+select * from amazonusers
 where username ilike $1 and
-userpassword ilike $2
+userpassword = $2

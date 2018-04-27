@@ -1,1 +1,1 @@
-delete from cart where productid = $1
+delete from amazoncart where productid = $1

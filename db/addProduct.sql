@@ -1,4 +1,4 @@
-insert into products (title, description, price, image, attributes) values (
+insert into amazonproducts (title, description, price, image, attributes) values (
     $1,
     $2,
     $3,

@@ -1,1 +1,1 @@
-delete from products where id = $1
+delete from amazonproducts where id = $1
