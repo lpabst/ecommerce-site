@@ -9,7 +9,8 @@ class ProductsLandingProducts extends Component {
         super(props)
 
         this.state = {
-            products: []
+            products: [],
+            loadingProducts: true,
         }
         
         this.addToCart = this.addToCart.bind(this);
@@ -18,8 +19,10 @@ class ProductsLandingProducts extends Component {
     componentDidMount() {
         axios.get(`/api/getProducts`)
             .then(res => {
+                console.log(res);
                 this.setState({
-                    products: res.data
+                    products: res.data,
+                    loadingProducts: false,
                 })
             })
     }
@@ -47,12 +50,13 @@ class ProductsLandingProducts extends Component {
                     )
                 }
             })
+        }else if (this.state.loadingProducts){
+            products = <div className='plpSingleProductWrapper'><h1>Loading Products...</h1></div>
         } else {
             products =
                 <div className='plpSingleProductWrapper'>
                     <h1>No 'products' in the database were found</h1>
                 </div>
-
         }
 
         return (
