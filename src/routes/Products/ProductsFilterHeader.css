@@ -15,6 +15,7 @@
     margin: 10px 20px;
     color: #ccc;
     font-weight: lighter;
+    user-select: none;
     transition: all .3s;
 }
 .pfhContentWrapper li:hover{
