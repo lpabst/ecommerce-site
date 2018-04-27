@@ -9,7 +9,7 @@ mainController = {
             return res.status(200).send( products )
         })
         .catch(err => {
-            console.log(err)
+            
             res.status(500).send(err)
         })
     },
@@ -21,7 +21,7 @@ mainController = {
                 return res.status(200).send( productsInCart )
             })
             .catch(err => {
-                console.log(err)
+                
                 res.status(500).send(err)
             })
         } else {
@@ -29,7 +29,7 @@ mainController = {
         }
     },
     login: function(req, res){
-        console.log('hit')
+        
         const db = req.app.get('db');
         db.login([req.body.username, req.body.userpassword])
         .then( response => {
@@ -45,17 +45,17 @@ mainController = {
             } else {
                 return res.status(200).send('Invalid username or password.')
             }
-            console.log(response)
-            console.log(req.session)
+            
+            
             return res.status(200).json( response )
         })
         .catch(err => {
-            console.log(err)
+            
             res.status(500).send(err)
         })        
     },
     loadCart: function(){
-        console.log('loadCart hit')
+        
     },
     addToCart: function(req, res){
         const db = req.app.get('db');        
@@ -76,27 +76,27 @@ mainController = {
             .then( response => {
                 return res.status(200).send(response)
             }).catch(err=>{});
-            console.log(response)
+            
         }).catch(err=>{});
     },
     addProduct: function(req, res){
         const db = req.app.get('db');
-        console.log(req.session)
+        
         if(req.session.isAdmin === false || !req.session.isAdmin){
             return res.status(200).send( 'This function requires being logged in as an admin.' )
         }
         db.addProduct([req.body.title, req.body.description, req.body.price, req.body.image, req.body.attributes])
         .then( product => {
-            console.log(product)
+            
             return res.status(200).send( req.body.title + " was added to the product's database." )
         })
         .catch(err => {
-            console.log(err)
+            
             res.status(500).send(err)
         })
     },
     deleteProduct: function(req, res){
-        console.log(req.query)
+        
         const db = req.app.get('db');
         if(req.session.isAdmin === false || !req.session.isAdmin){
             return res.status(200).send( 'This function requires being logged in as an admin.' )
@@ -110,7 +110,7 @@ mainController = {
             return res.status(200).send( req.query.productTitle + " was deleted from the product's database." )
         })
         .catch(err => {
-            console.log(err)
+            
             res.status(500).send(err)
         })        
     },
@@ -124,7 +124,7 @@ mainController = {
             return res.status(200).send( req.body.title + " was updated in the product's database." )
         })
         .catch(err => {
-            console.log(err)
+            
             res.status(500).send(err)
         })         
     }

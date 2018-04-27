@@ -22,9 +22,7 @@ massive(config.connection)
   app.set('db', db);
 }).catch(err=>{});
 
-app.use(express.static(__dirname + './../build'))
-
-var userController = require("./userController.js");
+app.use(express.static(__dirname + './../build'));
 
 //////////Endpoints for the front end
 const mainController = require('./mainController.js');

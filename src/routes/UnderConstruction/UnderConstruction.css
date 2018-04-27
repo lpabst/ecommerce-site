@@ -1,4 +1,9 @@
 
+.constructionContent{
+    width: 100%;
+    overflow: hidden;
+}
+
 .fullScreenImg{
     width: 100%;
     height: calc(100vh - 60px);
@@ -19,4 +24,36 @@
     background: #ccc;
     opacity: 0.7;
     box-shadow: 2px 2px 3px black;
+}
+
+@media(max-width: 815px){
+    .fullScreenImg{
+        width: auto;
+    }
+    
+    .constructionWords{
+        width: 300px;
+        min-height: 100px;
+        position: absolute;
+        top: calc(50% - 150px);
+        left: calc(50% - 150px);
+        z-index: 160;
+        font-size: 25px;
+        font-weight: bold;
+        background: #ccc;
+        opacity: 0.7;
+        box-shadow: 2px 2px 3px black;
+    }
+}
+
+@media (min-aspect-ratio: 5/9) {
+    .fullScreenImg{
+        width: 100%
+    }
+}
+
+@media(max-height: 415px){
+    .constructionWords{
+        top: 100px;
+    }
 }
