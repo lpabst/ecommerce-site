@@ -62,10 +62,10 @@ class MainHeader extends Component {
                         <img className='aLink' style={{ "height": "40px" }} src={arrow} alt="" />
                     </Link>
                     <div style={{ "width": "500px" }} className='flexRow'>
-                        <Link to='/products' className='navTextMedium'>PRODUCTS</Link>
-                        <Link to='/' className='navTextMedium'>ABOUT</Link>
-                        <Link to='/' className='navTextMedium'>COMMUNITY</Link>
-                        <Link to='/' className='navTextMedium'>SUPPORT</Link>
+                        <Link to='/' className='navTextMedium'>PRODUCTS</Link>
+                        <Link to='/about' className='navTextMedium'>ABOUT</Link>
+                        <Link to='/community' className='navTextMedium'>COMMUNITY</Link>
+                        <Link to='/support' className='navTextMedium'>SUPPORT</Link>
                     </div>
                     <div style={{ "width": "150px" }} className='flexRow'>
                         {loginIcon}

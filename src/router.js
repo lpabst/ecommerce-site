@@ -12,7 +12,7 @@ import CartLanding from './components/Cart/CartLanding.js';
 export default (
     <Switch>
         
-        <Route component={ Home } path='/' exact />
+        <Route component={ ProductsLanding } path='/' exact />
         <Route component={ ProductsLanding } path='/products' exact />
         {/*<Route component={ LoginLanding } path='/login' exact />*/}
         <Route component={ AdminLanding } path='/admin' exact />
