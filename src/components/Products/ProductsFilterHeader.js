@@ -10,7 +10,7 @@ class ProductsFilterHeader extends Component {
         this.state = {
             itemColors:['#19f','#ccc','#ccc','#ccc','#ccc','#ccc','#ccc','#ccc','#ccc','#ccc','#ccc','#ccc','#ccc','#ccc','#ccc']
         }
-        //bind shit here
+        
         this.updateItemColors = this.updateItemColors.bind(this);
     }
 

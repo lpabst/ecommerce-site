@@ -9,7 +9,6 @@ class Bitmoji extends Component {
 
     this.state = {
     }
-    //bind shit here
   }
 
   render() {

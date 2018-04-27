@@ -14,7 +14,7 @@ class CartLanding extends Component {
     this.state = {
       productsInCart:[]
     }
-    //bind shit here
+    // 
   }
 
   componentDidMount() {

@@ -15,7 +15,7 @@ class MainHeader extends Component {
         super(props)
 
         this.state = window.mainHeaderState
-        //bind shit here
+        // 
         this.updateShowLogin = this.updateShowLogin.bind(this);
         this.updateIsAdmin = this.updateIsAdmin.bind(this);
     }

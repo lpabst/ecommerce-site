@@ -20,7 +20,7 @@ class AdminLanding extends Component {
       attributesInput: 'All',
       editClicked: false
     }
-    //bind shit here
+    
     this.handleImageInput = this.handleImageInput.bind(this);
     this.handleTitleInput = this.handleTitleInput.bind(this);
     this.handleDescriptionInput = this.handleDescriptionInput.bind(this);

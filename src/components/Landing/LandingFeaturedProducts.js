@@ -8,7 +8,7 @@ class LandingFeaturedProducts extends Component {
         this.state = {
 
         }
-        //bind
+        
     }
 
     render(){

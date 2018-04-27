@@ -14,7 +14,7 @@ class LoginLanding extends Component {
       passwordInput: '',
       adminLogin: false
     }
-    //bind shit here
+    
     this.login = this.login.bind(this);
     this.handleUsernameInput = this.handleUsernameInput.bind(this);
     this.handlePasswordInput = this.handlePasswordInput.bind(this);

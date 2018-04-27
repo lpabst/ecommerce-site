@@ -12,7 +12,7 @@ class ProductsLanding extends Component {
     this.state = {
       attributeToShow:'All'
     }
-    //bind shit here
+    
     this.updateAttributeToShow = this.updateAttributeToShow.bind(this);
   }
 

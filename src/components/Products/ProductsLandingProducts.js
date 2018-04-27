@@ -11,7 +11,7 @@ class ProductsLandingProducts extends Component {
         this.state = {
             products: []
         }
-        //bind shit here
+        
         this.addToCart = this.addToCart.bind(this);
     }
 
