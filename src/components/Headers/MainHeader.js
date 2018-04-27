@@ -9,7 +9,8 @@ import hamMenu from './../../media/hamMenu.png';
 window.mainHeaderState = {
     isAdmin: false,
     showLogin: false,
-    userName: ''
+    userName: '',
+    showMobileDropdown: false
 }
 
 class MainHeader extends Component {
@@ -69,7 +70,18 @@ class MainHeader extends Component {
                         <Link to='/about' className='navTextMedium'>ABOUT</Link>
                     </div>
                     <div className={`mobileHeader`}>
-                        <img className={`hamMenu`} src={hamMenu} alt='hamburger menu' />
+                        <img className={`hamMenu`} src={hamMenu} alt='hamburger menu' onClick={(e)=>this.setState({showMobileDropdown: !this.state.showMobileDropdown})} />
+
+                        { this.state.showMobileDropdown ? 
+                            <div className='mobileDropdown'>
+                                <p><Link to='/'>PRODUCTS</Link></p>
+                                <p><Link to='/community'>COMMUNITY</Link></p>
+                                <p><Link to='/support'>SUPPORT</Link></p>
+                                <p><Link to='/about'>ABOUT</Link></p>
+                            </div>
+                        : null
+                        }
+
                     </div>
                     <div className={`flexRow rightMenu`}>
                         {loginIcon}
