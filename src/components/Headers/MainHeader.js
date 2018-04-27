@@ -24,7 +24,8 @@ class MainHeader extends Component {
     }
 
     componentWillUnmount(){
-        window.mainHeaderState = this.state;
+        window.mainHeaderState = this.state;  
+        window.mainHeaderState.showMobileDropdown = false;
     }
 
     updateShowLogin(){
