@@ -142,7 +142,7 @@ class AdminLanding extends Component {
                     <h1>Price</h1>
                     <input value={this.state.priceInput} onChange={(e) => this.setState({priceInput: e.target.value})} type="text"/>
                     <br/>
-                    <h1>Attributes (Attributes should be capitalized and separated by a space only.)</h1>
+                    <h1>Attributes (Attributes can be separated by a space, a comma, or any symbol of your choice)</h1>
                     <input value={this.state.attributesInput} onChange={(e) => this.setState({attributesInput: e.target.value})} type="text"/>
                     <br/>
                     <button onClick={this.submit}>Submit</button>
@@ -154,7 +154,7 @@ class AdminLanding extends Component {
                         <img src={this.state.imageInput === '' ? defaultImage : this.state.imageInput} alt="" />
                         <h1>{this.state.titleInput === '' ? defaultTitle : this.state.titleInput}</h1>
                         <p>{this.state.descriptionInput === '' ? defaultDescription : this.state.descriptionInput}</p>
-                        <h3>{this.state.priceInput === '' ? defaultPrice : this.state.priceInput}</h3>
+                        <h3>${this.state.priceInput === '' ? defaultPrice : this.state.priceInput}</h3>
                         <h5>Buy Now</h5>
                     </div>
                   </div>

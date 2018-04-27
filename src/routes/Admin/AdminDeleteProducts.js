@@ -43,7 +43,7 @@ class AdminDeleteProducts extends Component {
             <img src={product.image} alt="" />
             <h1>{product.title}</h1>
             <p>{product.description}</p>
-            <h3>{product.price}</h3>
+            <h3>${product.price}</h3>
             <h5 onClick={() => this.deleteProduct(product.id, product.title)}>Delete</h5>
             <h5 onClick={() => this.props.editProduct(product.id, 
                                                       product.image, 

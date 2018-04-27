@@ -11,13 +11,14 @@ export default (
     <Switch>
         
         <Route component={ ProductsLanding } path='/' exact />
-        <Route component={ ProductsLanding } path='/products' exact />
         <Route component={ AdminLanding } path='/admin' exact />
         <Route component={ CartLanding } path='/cart' exact />
         <Route component={ UnderConstruction }path='/community' exact />
         <Route component={ UnderConstruction } path='/support' exact />
         <Route component={ UnderConstruction } path='/about' exact />
         <Route component={ UnderConstruction } path='/terms' exact />
+        <Route component={ UnderConstruction } path='/signup' exact />
+        <Route component={ ProductsLanding } />
 
     </Switch>
 )
