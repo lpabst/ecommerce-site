@@ -1,8 +1,9 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import LoginLanding from './../Login/LoginLanding.js';
-
 import './MainHeader.css';
+
+import arrow from './../../media/arrow.png';
 
 window.mainHeaderState = {
     isAdmin: false,
@@ -58,15 +59,13 @@ class MainHeader extends Component {
             <section>
                 <div className="mainHeaderWrapper">
                     <Link to='/' style={{ "width": "230px" }} className='flexRow'>
-                        <img className='aLink' style={{ "height": "40px" }} src="https://cdn.rekkerd.org/wp-content/uploads/2017/03/Native-Instruments-logo.png" alt="" />
-                        {/*<ul style={headerName} >Native Instruments</ul>*/}
+                        <img className='aLink' style={{ "height": "40px" }} src={arrow} alt="" />
                     </Link>
                     <div style={{ "width": "500px" }} className='flexRow'>
                         <Link to='/products' className='navTextMedium'>PRODUCTS</Link>
-                        <Link to='/' className='navTextMedium'>BLOG</Link>
+                        <Link to='/' className='navTextMedium'>ABOUT</Link>
                         <Link to='/' className='navTextMedium'>COMMUNITY</Link>
                         <Link to='/' className='navTextMedium'>SUPPORT</Link>
-                        {adminProtalLink}
                     </div>
                     <div style={{ "width": "150px" }} className='flexRow'>
                         {loginIcon}

@@ -63,15 +63,17 @@ class LoginLanding extends Component {
       {"height": "fit-content","padding": "30px","left":"0%"};
 
     return (
-      <section style={loginLandingSectionStyle} id="loginLandingSection">
-        <div>
-          <h1>Enter Username</h1>
-          <input value={this.state.usernameInput} onChange={this.handleUsernameInput} type="text"/>
-          <br/>
-          <h1>Enter Password</h1>
-          <input value={this.state.passwordInput} onChange={this.handlePasswordInput} type="text"/>
-          <button onClick={this.login}>Login</button>
-          <br/>
+      <section className='loginWrapper'>
+        <div style={loginLandingSectionStyle} id="loginLandingSection">
+          <div>
+            <h1>Enter Username</h1>
+            <input value={this.state.usernameInput} onChange={this.handleUsernameInput} type="text"/>
+            <br/>
+            <h1>Enter Password</h1>
+            <input value={this.state.passwordInput} onChange={this.handlePasswordInput} type="text"/>
+            <button onClick={this.login}>Login</button>
+            <br/>
+          </div>
         </div>
       </section>
     );
