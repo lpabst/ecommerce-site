@@ -11,7 +11,7 @@ class UnderConstruction extends Component {
                 <MainHeader/>
 
                 <div className='constructionContent'>
-                    <p>This page is currently under construction. Thank you for your patience!</p>
+                    <p className='constructionWords' >This page is currently under construction. Thank you for your patience!</p>
                     <img className='fullScreenImg' src="https://images.pexels.com/photos/159306/construction-site-build-construction-work-159306.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260" alt="construction worker"/>
                 </div>
                 

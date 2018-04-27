@@ -5,7 +5,7 @@ import { Switch, Route } from 'react-router-dom';
 import ProductsLanding from './routes/Products/ProductsLanding.js';
 import AdminLanding from './routes/Admin/AdminLanding.js';
 import CartLanding from './routes/Cart/CartLanding.js';
-import UnderConstruction from './routes/UnderConstruction/UnderConstruction.js';
+import UnderConstruction from './routes/UnderConstruction/UnderConstruction.jsx';
 
 
 export default (
