@@ -75,9 +75,9 @@ mainController = {
             db.addProductToCart([req.body.productID, req.session.user])
             .then( response => {
                 return res.status(200).send(response)
-            })
+            }).catch(err=>{});
             console.log(response)
-        })
+        }).catch(err=>{});
     },
     addProduct: function(req, res){
         const db = req.app.get('db');
@@ -103,7 +103,7 @@ mainController = {
         }
         db.deleteProductFromCart([req.query.productID])
         .then( product => {
-        })
+        }).catch(err=>{});
 
         db.deleteProductFromProducts([req.query.productID])
         .then( product => {

@@ -20,7 +20,7 @@ app.use(session({
 massive(config.connection)
 .then(db => {
   app.set('db', db);
-})
+}).catch(err=>{});
 
 app.use(express.static(__dirname + './../build'))
 
