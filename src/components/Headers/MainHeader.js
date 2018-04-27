@@ -4,6 +4,7 @@ import LoginLanding from './../Login/LoginLanding.js';
 import './MainHeader.css';
 
 import arrow from './../../media/arrow.png';
+import hamMenu from './../../media/hamMenu.png';
 
 window.mainHeaderState = {
     isAdmin: false,
@@ -58,19 +59,22 @@ class MainHeader extends Component {
         return (
             <section>
                 <div className="mainHeaderWrapper">
-                    <Link to='/' style={{ "width": "230px" }} className='flexRow'>
-                        <img className='aLink' style={{ "height": "40px" }} src={arrow} alt="" />
+                    <Link to='/'>
+                        <img className='headerLogo' src={arrow} alt="" />
                     </Link>
-                    <div style={{ "width": "500px" }} className='flexRow'>
+                    <div style={{ "width": "500px" }} className={`flexRow desktopHeader`}>
                         <Link to='/' className='navTextMedium'>PRODUCTS</Link>
                         <Link to='/community' className='navTextMedium'>COMMUNITY</Link>
                         <Link to='/support' className='navTextMedium'>SUPPORT</Link>
                         <Link to='/about' className='navTextMedium'>ABOUT</Link>
                     </div>
-                    <div style={{ "width": "150px" }} className='flexRow'>
+                    <div className={`mobileHeader`}>
+                        <img className={`hamMenu`} src={hamMenu} alt='hamburger menu' />
+                    </div>
+                    <div className={`flexRow rightMenu`}>
                         {loginIcon}
                         <Link to='/cart'><img className='aLink' style={{ "height": "20px" }} src="https://d30y9cdsu7xlg0.cloudfront.net/png/5641-200.png" alt="" /></Link>
-                        <img className='aLink' style={{ "height": "20px" }} src="https://maxcdn.icons8.com/Share/icon/p1em/Very_Basic//search1600.png" alt="" />
+                        <img className={`aLink searchGlass`} src="https://maxcdn.icons8.com/Share/icon/p1em/Very_Basic//search1600.png" alt="" />
                     </div>
                 </div>
                 <LoginLanding   showLogin={this.state.showLogin}

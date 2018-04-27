@@ -9,3 +9,52 @@
 .mainHeaderWrapper ul:hover{
     border-bottom: 5px solid grey;
 }
+
+.headerLogo{
+    width: 200px;
+    height: auto;
+    margin-top: 5px;
+}
+
+.mobileHeader{
+    width: 60px;
+    height: 60px;
+    display: none;
+}
+
+.hamMenu{
+    width: 40px;
+    height: 40px;
+    position: absolute;
+    top: 10px;
+    left: 10px;
+}
+
+.rightMenu{
+    width: 150px;
+}
+
+.searchGlass{
+    height: 20px;
+}
+
+@media(max-width: 815px){
+    .headerLogo{
+        width: 50px;
+        margin-top: 25px;
+        position: absolute;
+        left: calc(50% - 25px);
+    }
+    .desktopHeader{
+        display: none !important;
+    }
+    .mobileHeader{
+        display: block;
+    }
+    .rightMenu{
+        width: 60px;
+    }
+    .searchGlass{
+        display: none;
+    }
+}
