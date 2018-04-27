@@ -36,7 +36,7 @@ export default function MainFooter(){
                     </div>
                     <div>
                        <h3>Terms and Agreements</h3> 
-                       <h1>Terms Of Use</h1>
+                       <Link to='/terms'>Terms Of Use</Link>
                     </div>
                 </div>
             </section>
