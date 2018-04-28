@@ -37,6 +37,27 @@
 .clContentDescriptionHeader h1:nth-child(5){
   text-align: right;
 }
+
+.clCart1{
+  width: 12%
+}
+
+.clCart2{
+  width: 53%;
+}
+
+.clCart3{
+  width: 10%;
+}
+
+.clCart4{
+  width: 15%;
+}
+
+.clCart5{
+  width: 10%;
+}
+
 .clContentSingleItem{
   width: 100%;
   height: fit-content;
@@ -59,8 +80,10 @@
   padding: 20px;
   display: flex;
   justify-content: space-between;
+  position: relative;
 }
 .clCheckoutWrapperLeft{
+  width: 200px;
   text-decoration: none;
 }
 .clCheckoutWrapperLeft h1{
@@ -71,6 +94,7 @@
 .clCheckoutWrapperRight{
   width: 320px;
   display: flex;
+  padding-left: 80px;
 }
 .clCheckoutWrapperRight div{
   margin-left:40px;
@@ -90,17 +114,62 @@
   padding: 20px;
 }
 .clCheckoutButton{
-  padding: 20px;
-  margin-right: 20px;
+  width: 100%;
+  height: 50px;
   position: relative;
 }
 .clCheckoutButton a{
-  padding: 20px;
-  margin-top: -20px;
+  width: 120px;
+  height: 30px;
+  line-height: 30px;
   position: absolute;
-  right: 0px;
+  right: 20px;
+  top: 10px;
   background: lightblue;
-  text-align: right;
+  text-align: center;
   text-decoration: none;
   color: black;
+}
+
+@media(max-width:815px){
+  .clContentSection{
+    padding: 0px;
+  }
+  .clContentSingleItem div{
+    font-size: 14px;
+  }
+  .clCheckoutSection{
+    padding: 30px 0px;
+  }
+  .clCheckoutWrapperLeft{
+    position: absolute;
+    bottom: 0px;
+    right: calc(50% - 100px);
+  }
+  .clCheckoutWrapperRight{
+    width: 300px;
+    margin: 0 auto;
+  }
+  .clCheckoutButton a{
+    right: calc(50% - 60px);
+  }
+  .clCart1{
+    width: 10%
+  }
+  
+  .clCart2{
+    width: 20%;
+  }
+  
+  .clCart3{
+    width: 20%;
+  }
+  
+  .clCart4{
+    width: 20%;
+  }
+  
+  .clCart5{
+    width: 20%;
+  }
 }

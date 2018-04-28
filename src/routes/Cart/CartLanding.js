@@ -35,7 +35,7 @@ class CartLanding extends Component {
     price = parseFloat(price.split(',').join(''))
     let total = price * qnt;
     
-    return total.toLocaleString();
+    return total
   }
 
   // go through the products in the cart, get the price for each product, remove $ and commas, multiply by qnt, 
@@ -50,7 +50,7 @@ class CartLanding extends Component {
       total += (price * arr[i].quantity);
     }
     
-    return total.toLocaleString();
+    return total
   }
 
   render() {
@@ -60,13 +60,13 @@ class CartLanding extends Component {
         let total = this.productTotal(product.price, product.quantity)
         return (
           <div className='clContentSingleItem' key={i}>
-            <div style={{"width":"12%"}}>
+            <div  className='clCart1' >
               <img src={product.image} alt=""/>
             </div>
-            <div style={{"width":"53%"}}>{product.title}</div>
-            <div style={{"width":"10%"}}>{product.price}</div>
-            <div style={{"width":"15%"}}>{product.quantity}</div>
-            <div style={{"width":"10%"}}>${total}</div>
+            <div className='clCart2' >{product.title}</div>
+            <div className='clCart3' >${product.price}</div>
+            <div className='clCart4' >{product.quantity}</div>
+            <div className='clCart5' >${(total.toFixed(2)).toLocaleString()}</div>
           </div>          
         )
       }): null;
@@ -75,18 +75,21 @@ class CartLanding extends Component {
 
     return (
       <section className="">
+
         <MainHeader getProductsInCart={this.getProductsInCart} />
+
         <div className='clCartHeader'>
           <h1>Shopping Cart</h1>
         </div>   
+
         <section className='clContentSection'>
           <div className='clContentWrapper'>
             <div className='clContentDescriptionHeader'>
-              <h1 style={{"width":"12%"}}> </h1>
-              <h1 style={{"width":"53%"}}>Product</h1>
-              <h1 style={{"width":"10%"}}>Price</h1>
-              <h1 style={{"width":"15%"}}>Quantity</h1>
-              <h1 style={{"width":"10%"}}>Total</h1>
+              <h1 className='clCart1' > </h1>
+              <h1 className='clCart2' >Product</h1>
+              <h1 className='clCart3' >Price</h1>
+              <h1 className='clCart4' >Quantity</h1>
+              <h1 className='clCart5' >Total</h1>
             </div>
             { productsInCart }
             <div className='clCheckoutSection'> 
@@ -101,10 +104,10 @@ class CartLanding extends Component {
                   <h3>Order Total</h3>    
                 </div>
                 <div>
-                  <h1>${subTotal}</h1>    
-                  <h1>${(subTotal*.065).toFixed(2)}</h1>    
+                  <h1>${subTotal.toLocaleString()}</h1>    
+                  <h1>${((subTotal*.065).toFixed(2)).toLocaleString()}</h1>    
                   <h1>$0.00</h1>    
-                  <h3>${(subTotal*1.065).toFixed(2)}</h3>
+                  <h3>${((subTotal*1.065).toFixed(2)).toLocaleString()}</h3>
                 </div>
               </div>
             </div>
@@ -114,7 +117,9 @@ class CartLanding extends Component {
             }
           </div>
         </section>
+
         <MainFooter/>
+
       </section>
     );
   }
