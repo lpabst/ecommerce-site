@@ -14,15 +14,18 @@ class CartLanding extends Component {
     this.state = {
       productsInCart:[]
     }
-    // 
+
+    this.getProductsInCart = this.getProductsInCart.bind(this); 
   }
 
   componentDidMount() {
+    this.getProductsInCart();
+  }
+
+  getProductsInCart(){
     axios.get(`/api/getProductsInCart`)
       .then(res => {
-        this.setState({
-            productsInCart: res.data
-        })
+        this.setState({ productsInCart: res.data })
       })
   }
 
@@ -74,7 +77,7 @@ class CartLanding extends Component {
 
     return (
       <section className="">
-        <MainHeader/>
+        <MainHeader getProductsInCart={this.getProductsInCart} />
         <div className='clCartHeader'>
           <h1>Shopping Cart</h1>
         </div>   

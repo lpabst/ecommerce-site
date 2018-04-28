@@ -45,7 +45,8 @@ class LoginLanding extends Component {
       }
       if(res.data.length){
         alert('Logged in as ' + res.data[0].username)
-        this.props.updateShowLogin()
+        this.props.updateShowLogin();
+        this.props.updateCart();
       }
     })   
   }
