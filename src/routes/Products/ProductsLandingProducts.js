@@ -30,7 +30,14 @@ class ProductsLandingProducts extends Component {
     addToCart(productID, productTitle) {
         axios.post('/api/addToCart', { "productID": productID })
             .then(res => {
-                alert(productTitle + ' was added to your cart.');
+                if (res.data.error && res.data.message){
+                    alert(res.data.message);
+                }else if (res.data.error){
+                    alert('We encountered an unexpected error, please try again');
+                }else{
+                    console.log(res);
+                    alert(productTitle + ' was added to your cart.');
+                }
             })
     }
 
@@ -53,6 +60,8 @@ class ProductsLandingProducts extends Component {
                             <h5 onClick={() => this.addToCart(product.id, product.title)}>Buy Now</h5>
                         </div>
                     )
+                }else{
+                    return null;
                 }
 
             })

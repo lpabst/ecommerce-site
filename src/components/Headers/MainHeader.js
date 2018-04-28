@@ -1,8 +1,9 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
-import LoginLanding from './../Login/LoginLanding.js';
+import axios from 'axios';
 import './MainHeader.css';
 
+import LoginLanding from './../Login/LoginLanding.js';
 import arrow from './../../media/arrow.png';
 import hamMenu from './../../media/hamMenu.png';
 
@@ -23,15 +24,22 @@ class MainHeader extends Component {
         this.updateIsAdmin = this.updateIsAdmin.bind(this);
     }
 
+    componentDidMount(){
+        axios.get('/api/isAdmin')
+        .then( res => {
+            this.setState({isAdmin: res.data.isAdmin})
+        })
+        .catch(err=>{})
+    }
+
     componentWillUnmount(){
         window.mainHeaderState = this.state;  
         window.mainHeaderState.showMobileDropdown = false;
     }
 
     updateShowLogin(){
-        let val = this.state.showLogin ? false : true;
         this.setState({
-            showLogin: val
+            showLogin: !this.state.showLogin
         })
     }
 
@@ -43,20 +51,12 @@ class MainHeader extends Component {
     }
 
     render() {
-        let headerName = {
-            "transform": "scale(1, .6)",
-            "font-weight": "bolder",
-            "letter-spacing": "-1px",
-            "font-size": "20px"
-        }
-
-        let adminProtalLink = this.state.isAdmin ?
-            <Link to='/admin' className='navTextMedium'>ADMIN PORTAL</Link> :
-            null;
         
         let loginIcon = this.state.userName === '' ?
             <img onClick={this.updateShowLogin} className='aLink' style={{ "height": "20px" }} src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQETV_iGZaujVjXGEEhzClQMErGjomXPTr7XfTj_qIltNDzqUwmAQ" alt="" />:
             <h1 onClick={this.updateShowLogin} className='aLink' style={{"height": "20px"}}>{this.state.userName}</h1>
+
+        let updateCart = this.props.getProductsInCart || function(){};
 
         return (
             <section>
@@ -70,6 +70,7 @@ class MainHeader extends Component {
                         <Link to='/community' className='navTextMedium'>COMMUNITY</Link>
                         <Link to='/support' className='navTextMedium'>SUPPORT</Link>
                         <Link to='/about' className='navTextMedium'>ABOUT</Link>
+                        { this.state.isAdmin ? <Link to='/admin' className='navTextMedium'>ADMIN</Link> : null }
                     </div>
 
                     <div className={`mobileNav`}>
@@ -94,7 +95,8 @@ class MainHeader extends Component {
                 </div>
                 <LoginLanding   showLogin={this.state.showLogin}
                                 updateIsAdmin={this.updateIsAdmin}
-                                updateShowLogin={this.updateShowLogin}/>
+                                updateShowLogin={this.updateShowLogin}
+                                updateCart={updateCart} />
             </section>
         );
     }

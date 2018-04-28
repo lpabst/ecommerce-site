@@ -23,7 +23,12 @@ class LoginLanding extends Component {
   login(){
     axios.post(`/api/login`, {"username":this.state.usernameInput, "userpassword":this.state.passwordInput})
     .then( res => {
-      if(res.data[0].isadmin === true){
+      if (res.data.error && res.data.message){
+        alert(res.data.message);
+      }else if (!res.data[0] || res.data.error){
+        alert('We encountered an unexpected error, please try again');
+      }
+      else if(res.data[0].isadmin === true){
         this.setState({
           adminLogin: true,
           usernameInput: '',
@@ -39,8 +44,9 @@ class LoginLanding extends Component {
         this.props.updateIsAdmin(false, res.data[0].username)
       }
       if(res.data.length){
-        alert('Logged in as ' + res.data[0].username)
-        this.props.updateShowLogin()
+        // alert('Logged in as ' + res.data[0].username)
+        this.props.updateShowLogin();
+        this.props.updateCart();
       }
     })   
   }
