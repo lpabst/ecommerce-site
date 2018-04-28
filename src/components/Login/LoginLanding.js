@@ -44,7 +44,7 @@ class LoginLanding extends Component {
         this.props.updateIsAdmin(false, res.data[0].username)
       }
       if(res.data.length){
-        alert('Logged in as ' + res.data[0].username)
+        // alert('Logged in as ' + res.data[0].username)
         this.props.updateShowLogin();
         this.props.updateCart();
       }

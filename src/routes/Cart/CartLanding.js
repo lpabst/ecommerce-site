@@ -71,9 +71,7 @@ class CartLanding extends Component {
         )
       }): null;
 
-    let subTotal = this.state.productsInCart.length ?
-      this.orderTotal()
-      :'0.00'
+    let subTotal = this.state.productsInCart.length ? this.orderTotal() :'0.00';
 
     return (
       <section className="">
@@ -84,7 +82,7 @@ class CartLanding extends Component {
         <section className='clContentSection'>
           <div className='clContentWrapper'>
             <div className='clContentDescriptionHeader'>
-              <h1 style={{"width":"12%"}}></h1>
+              <h1 style={{"width":"12%"}}> </h1>
               <h1 style={{"width":"53%"}}>Product</h1>
               <h1 style={{"width":"10%"}}>Price</h1>
               <h1 style={{"width":"15%"}}>Quantity</h1>

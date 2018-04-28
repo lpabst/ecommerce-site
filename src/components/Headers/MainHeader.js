@@ -51,16 +51,6 @@ class MainHeader extends Component {
     }
 
     render() {
-        let headerName = {
-            "transform": "scale(1, .6)",
-            "font-weight": "bolder",
-            "letter-spacing": "-1px",
-            "font-size": "20px"
-        }
-
-        let adminProtalLink = this.state.isAdmin ?
-            <Link to='/admin' className='navTextMedium'>ADMIN PORTAL</Link> :
-            null;
         
         let loginIcon = this.state.userName === '' ?
             <img onClick={this.updateShowLogin} className='aLink' style={{ "height": "20px" }} src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQETV_iGZaujVjXGEEhzClQMErGjomXPTr7XfTj_qIltNDzqUwmAQ" alt="" />:

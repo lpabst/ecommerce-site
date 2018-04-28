@@ -60,6 +60,8 @@ class ProductsLandingProducts extends Component {
                             <h5 onClick={() => this.addToCart(product.id, product.title)}>Buy Now</h5>
                         </div>
                     )
+                }else{
+                    return null;
                 }
 
             })
