@@ -37,6 +37,27 @@
 .clContentDescriptionHeader h1:nth-child(5){
   text-align: right;
 }
+
+.clContentHeader1{
+  width: 12%
+}
+
+.clContentHeader2{
+  width: 53%;
+}
+
+.clContentHeader3{
+  width: 10%;
+}
+
+.clContentHeader4{
+  width: 15%;
+}
+
+.clContentHeader5{
+  width: 10%;
+}
+
 .clContentSingleItem{
   width: 100%;
   height: fit-content;
@@ -103,4 +124,29 @@
   text-align: right;
   text-decoration: none;
   color: black;
+}
+
+@media(max-width:815px){
+  .clContentSection{
+    padding: 0px;
+  }
+  .clContentHeader1{
+    width: 10%
+  }
+  
+  .clContentHeader2{
+    width: 20%;
+  }
+  
+  .clContentHeader3{
+    width: 20%;
+  }
+  
+  .clContentHeader4{
+    width: 20%;
+  }
+  
+  .clContentHeader5{
+    width: 20%;
+  }
 }

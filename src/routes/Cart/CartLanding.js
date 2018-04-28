@@ -75,18 +75,21 @@ class CartLanding extends Component {
 
     return (
       <section className="">
+
         <MainHeader getProductsInCart={this.getProductsInCart} />
+
         <div className='clCartHeader'>
           <h1>Shopping Cart</h1>
         </div>   
+
         <section className='clContentSection'>
           <div className='clContentWrapper'>
             <div className='clContentDescriptionHeader'>
-              <h1 style={{"width":"12%"}}> </h1>
-              <h1 style={{"width":"53%"}}>Product</h1>
-              <h1 style={{"width":"10%"}}>Price</h1>
-              <h1 style={{"width":"15%"}}>Quantity</h1>
-              <h1 style={{"width":"10%"}}>Total</h1>
+              <h1 className='clContentHeader1' > </h1>
+              <h1 className='clContentHeader2' >Product</h1>
+              <h1 className='clContentHeader3' >Price</h1>
+              <h1 className='clContentHeader4' >Quantity</h1>
+              <h1 className='clContentHeader5' >Total</h1>
             </div>
             { productsInCart }
             <div className='clCheckoutSection'> 
@@ -114,7 +117,9 @@ class CartLanding extends Component {
             }
           </div>
         </section>
+
         <MainFooter/>
+
       </section>
     );
   }
