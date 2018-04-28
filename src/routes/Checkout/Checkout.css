@@ -1,9 +1,46 @@
 
+.info{
+    width: 300px;
+    position: relative;
+    margin: 30px 0px;
+    padding: 30px 20px;
+    background: lightblue;
+    box-shadow: 2px 2px 3px black;
+    font-weight: bold;
+    text-align: center;
+}
+
+.info input{
+    width: 250px;
+    height: 25px;
+    line-height: 23px;
+    font-size: 14px;
+    padding-left: 5px;
+    display: block;
+    margin: 5px 0px;
+}
+
+.checkoutSummary{
+    width: 300px;
+    height: auto;
+    padding: 30px 10px;
+    background: rgb(47, 108, 187);
+    box-shadow: 2px 2px 3px black;
+    font-size: 12px;
+}
+
+.checkoutSummary span{
+    font-size: 15px;
+    text-decoration: underline;
+    font-weight: bold;
+}
+
 .submitPaymentDiv{
     width: 200px;
     margin: 20px 0px 50px 0px;
     padding-left: 20px;
 }
+
 .submitPaymentBtn{
     width: 150px;
     height: 30px;

@@ -23,6 +23,7 @@ class Checkout extends Component {
         }
 
         this.getProductsInCart = this.getProductsInCart.bind(this);
+        this.placeOrder = this.placeOrder.bind(this);
     }
 
     componentDidMount() {
@@ -49,6 +50,19 @@ class Checkout extends Component {
         }
 
         return total.toLocaleString();
+    }
+
+    placeOrder(){
+        // Perform payment with Stripe
+        // Clear User's cart in the DB
+        // navigate user to a thank you / payment confirmation page
+    }
+
+    formatCardNum(num){
+        if (num.length !== 16){
+            return 'Invalid card number'
+        }
+        return num.substring(0,4) + '-' + num.substring(4,8) + '-' + num.substring(8,12) + '-' + num.substring(12,16);
     }
 
     render() {
@@ -81,25 +95,36 @@ class Checkout extends Component {
                     </div>
                 </div>
 
-                <div className='personalInfo'>
+                <div className='info'>
                     <p>Shipping Info</p>
-                    <input placeholder='Name' value={this.state.name} onChange={(e)=>this.setState({name: e.target.value})} />
+                    <input placeholder='Shipping Name' value={this.state.name} onChange={(e)=>this.setState({name: e.target.value})} />
                     <input placeholder='Street Address' value={this.state.streetAddress} onChange={(e)=>this.setState({streetAddress: e.target.value})} />
                     <input placeholder='City' value={this.state.city} onChange={(e)=>this.setState({city: e.target.value})} />
                     <input placeholder='State' value={this.state.state} onChange={(e)=>this.setState({state: e.target.value})} />
                     <input placeholder='Zip' value={this.state.zip} onChange={(e)=>this.setState({zip: e.target.value})} />
                 </div>
 
-                <div className='paymentInfo'>
+                <div className='info'>
                     <p>Payment Info</p>
                     <input placeholder='Name on card' value={this.state.nameOnCard} onChange={(e)=>this.setState({nameOnCard: e.target.value})} />
                     <input placeholder='Card Number' value={this.state.cardNumber} onChange={(e)=>this.setState({cardNumber: e.target.value})} />
                     <input placeholder='Expiration Date' value={this.state.cardExpires} onChange={(e)=>this.setState({cardExpires: e.target.value})} />
-                    <input placeholder='3 Digit Card Security Code' value={this.state.cardSecurityCode} onChange={(e)=>this.setcardSecurityCode({state: e.target.value})} />
+                    <input placeholder='3 Digit Card Security Code' value={this.state.cardSecurityCode} onChange={(e)=>this.setState({cardSecurityCode: e.target.value})} />
+                </div>
+
+                <div className='checkoutSummary'>
+                    <p>ORDER SUMMARY</p>
+                    <p>To: <span>{this.state.name}</span></p>
+                    <p>Shipping Address: <span>{this.state.streetAddress}</span></p>
+                    <p>City, State, Zip: <span>{this.state.city}, {this.state.state} {this.state.zip}</span></p>
+                    <p>Name On Card: <span>{this.state.nameOnCard}</span></p>
+                    <p>Card Number: <span>{this.formatCardNum(this.state.cardNumber)}</span></p>
+                    <p>Expiration Date: <span>{this.state.cardExpires}</span></p>
+                    <p>Security Code: <span>{this.state.cardSecurityCode}</span></p>
                 </div>
 
                 <div className='submitPaymentDiv'>
-                    <button className='submitPaymentBtn'>Submit Payment</button>
+                    <button className='submitPaymentBtn' onClick={()=>this.placeOrder} >Place Order</button>
                 </div>
 
                 <MainFooter />
