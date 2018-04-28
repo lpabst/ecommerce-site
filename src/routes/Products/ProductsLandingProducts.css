@@ -12,17 +12,20 @@
     flex-wrap: wrap;
 }
 .plpSingleProductWrapper{
-    width: 30%;
+    width: 25%;
     max-width: 420px;
+    min-width: 280px;
     margin: 15px;
+    padding-bottom: 30px;
     text-align: center;
     border: 1px solid #ddd;
     background: white;
     position: relative;
+    align-self: flex-start;
 }
 .plpSingleProductWrapper img{
-    width: 100%;
-    margin-bottom: 20px;
+    width: 92%;
+    margin: 10px 4% 20px 4%;
 }
 .plpSingleProductWrapper h1{
     font-size: 20px;
@@ -50,9 +53,8 @@
     line-height: 40px;
     background: #386ba5;
     width: 25%;
-    position: relative;
-    margin-bottom: 20px;
-    left: 37.5%;
+    min-width: 100px;
+    margin: 0 auto;
     transition: all .2s;
 }
 .plpSingleProductWrapper h5:hover{
