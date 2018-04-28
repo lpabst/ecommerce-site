@@ -18,6 +18,7 @@ export default (
         <Route component={ UnderConstruction } path='/about' exact />
         <Route component={ UnderConstruction } path='/terms' exact />
         <Route component={ UnderConstruction } path='/signup' exact />
+        <Route component={ UnderConstruction } path='/checkout' exact />
         <Route component={ ProductsLanding } />
 
     </Switch>

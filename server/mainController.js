@@ -17,13 +17,12 @@ mainController = {
     getProductsInCart: function(req, res){
         const db = req.app.get('db');
         if(req.session.isLoggedIn){
-            db.getProductsInCart()
+            db.getProductsInCart([req.session.user])
             .then( productsInCart => {
                 return res.status(200).send( productsInCart )
             })
             .catch(err => {
-                
-                res.status(500).send(err)
+                res.status(500).send({error: true, message: err})
             })
         } else {
             return res.status(200).send([])

@@ -94,11 +94,13 @@
   margin-right: 20px;
   position: relative;
 }
-.clCheckoutButton h1{
+.clCheckoutButton a{
   padding: 20px;
   margin-top: -20px;
   position: absolute;
   right: 0px;
   background: lightblue;
   text-align: right;
+  text-decoration: none;
+  color: black;
 }

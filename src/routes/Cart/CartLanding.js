@@ -26,25 +26,28 @@ class CartLanding extends Component {
       })
   }
 
-  productTotal(str, qnt){
-    let total = str;
-    total = total.split('$')[1]
-    total = parseInt(total.split(',').join(''))
-    total = total * qnt
-    total = total.toLocaleString()
-    return total
+  // remove $ and commas, then multiply price*qnt and return it formatted for the locale
+  productTotal(price, qnt){
+    price = price.replace('$', '');
+    price = parseFloat(price.split(',').join(''))
+    let total = price * qnt;
+    
+    return total.toLocaleString();
   }
 
+  // go through the products in the cart, get the price for each product, remove $ and commas, multiply by qnt, 
+  // then add it to the running total. at the end, format based on locale
   orderTotal(){
-    let x = this.state.productsInCart;
+    let arr = this.state.productsInCart;
     let total = 0;
-    for(let i=0; i<x.length; i++){
-      let iteration = x[i].price.split('$')[1];
-      iteration = parseInt(iteration.split(',').join(''));
-      total = total + (iteration * x[i].quantity);
+    
+    for(let i=0; i<arr.length; i++){
+      let price = arr[i].price.replace('$', '');
+      price = parseFloat(price.split(',').join(''));
+      total += (price * arr[i].quantity);
     }
-    total = total.toLocaleString();
-    return total
+    
+    return total.toLocaleString();
   }
 
   render() {
@@ -60,7 +63,7 @@ class CartLanding extends Component {
             <div style={{"width":"53%"}}>{product.title}</div>
             <div style={{"width":"10%"}}>{product.price}</div>
             <div style={{"width":"15%"}}>{product.quantity}</div>
-            <div style={{"width":"10%"}}>${total}.00</div>
+            <div style={{"width":"10%"}}>${total}</div>
           </div>          
         )
       }): null;
@@ -91,20 +94,23 @@ class CartLanding extends Component {
               </Link>
               <div className='clCheckoutWrapperRight'>
                 <div>
-                  <h1>Subtotal</h1>    
-                  <h1>Order Total Excl. Tax</h1>    
-                  <h1>incl. Tax</h1>    
+                  <h1>Subtotal</h1>      
+                  <h1>Tax</h1>    
+                  <h1>Shipping</h1>    
                   <h3>Order Total</h3>    
                 </div>
                 <div>
-                  <h1>${subTotal}.00</h1>    
-                  <h1>${subTotal}.00</h1>    
-                  <h1>0.00</h1>    
-                  <h3>${subTotal}.00</h3>
+                  <h1>${subTotal}</h1>    
+                  <h1>${(subTotal*.065).toFixed(2)}</h1>    
+                  <h1>$0.00</h1>    
+                  <h3>${(subTotal*1.065).toFixed(2)}</h3>
                 </div>
               </div>
             </div>
-            <div className='clCheckoutButton'><h1>CHECKOUT</h1></div> 
+            { this.state.productsInCart.length ?
+                <div className='clCheckoutButton'><Link to='/checkout'>CHECKOUT</Link></div> 
+              : null
+            }
           </div>
         </section>
         <MainFooter/>
