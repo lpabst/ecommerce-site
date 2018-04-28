@@ -43,14 +43,27 @@
     font-size: 16px;
     margin-bottom: 17px;
 }
-.footerSectionContentContainer h1{
-    color: #ddd;
-    font-size: 13px;
-    font-weight: lighter;
-    margin-bottom: 17px;
+
+@media(max-width:815px){
+    .footerSectionContentContainer h3{
+        color: #ddd;
+        font-weight: bold;
+        font-size: 12px;
+        margin-bottom: 17px;
+    }
+    .footerSectionContentContainer a{
+        color: #ddd;
+        font-size: 10px;
+        font-weight: lighter;
+        margin-bottom: 17px;
+    }
 }
 
-.footerSectionContentContainer h1:hover{
-    text-decoration: underline;
-    cursor: pointer;
+@media(max-width: 500px){
+    .footerSection{
+        height: 80px;
+    }
+    .footerSectionContentContainerWrapper{
+        display: none;
+    }
 }
