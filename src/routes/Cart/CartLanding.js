@@ -60,13 +60,13 @@ class CartLanding extends Component {
         let total = this.productTotal(product.price, product.quantity)
         return (
           <div className='clContentSingleItem' key={i}>
-            <div style={{"width":"12%"}}>
+            <div  className='clCart1' >
               <img src={product.image} alt=""/>
             </div>
-            <div style={{"width":"53%"}}>{product.title}</div>
-            <div style={{"width":"10%"}}>{product.price}</div>
-            <div style={{"width":"15%"}}>{product.quantity}</div>
-            <div style={{"width":"10%"}}>${total}</div>
+            <div className='clCart2' >{product.title}</div>
+            <div className='clCart3' >{product.price}</div>
+            <div className='clCart4' >{product.quantity}</div>
+            <div className='clCart5' >${total}</div>
           </div>          
         )
       }): null;
@@ -85,11 +85,11 @@ class CartLanding extends Component {
         <section className='clContentSection'>
           <div className='clContentWrapper'>
             <div className='clContentDescriptionHeader'>
-              <h1 className='clContentHeader1' > </h1>
-              <h1 className='clContentHeader2' >Product</h1>
-              <h1 className='clContentHeader3' >Price</h1>
-              <h1 className='clContentHeader4' >Quantity</h1>
-              <h1 className='clContentHeader5' >Total</h1>
+              <h1 className='clCart1' > </h1>
+              <h1 className='clCart2' >Product</h1>
+              <h1 className='clCart3' >Price</h1>
+              <h1 className='clCart4' >Quantity</h1>
+              <h1 className='clCart5' >Total</h1>
             </div>
             { productsInCart }
             <div className='clCheckoutSection'> 
