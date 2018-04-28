@@ -1,13 +1,16 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import LoginLanding from './../Login/LoginLanding.js';
-
 import './MainHeader.css';
+
+import arrow from './../../media/arrow.png';
+import hamMenu from './../../media/hamMenu.png';
 
 window.mainHeaderState = {
     isAdmin: false,
     showLogin: false,
-    userName: ''
+    userName: '',
+    showMobileDropdown: false
 }
 
 class MainHeader extends Component {
@@ -15,13 +18,14 @@ class MainHeader extends Component {
         super(props)
 
         this.state = window.mainHeaderState
-        //bind shit here
+        // 
         this.updateShowLogin = this.updateShowLogin.bind(this);
         this.updateIsAdmin = this.updateIsAdmin.bind(this);
     }
 
     componentWillUnmount(){
-        window.mainHeaderState = this.state;
+        window.mainHeaderState = this.state;  
+        window.mainHeaderState.showMobileDropdown = false;
     }
 
     updateShowLogin(){
@@ -57,21 +61,35 @@ class MainHeader extends Component {
         return (
             <section>
                 <div className="mainHeaderWrapper">
-                    <Link to='/' style={{ "width": "230px" }} className='flexRow'>
-                        <img className='aLink' style={{ "height": "40px" }} src="https://cdn.rekkerd.org/wp-content/uploads/2017/03/Native-Instruments-logo.png" alt="" />
-                        {/*<ul style={headerName} >Native Instruments</ul>*/}
+                    <Link to='/'>
+                        <img className='headerLogo' src={arrow} alt="" />
                     </Link>
-                    <div style={{ "width": "500px" }} className='flexRow'>
-                        <Link to='/products' className='navTextMedium'>PRODUCTS</Link>
-                        <Link to='/' className='navTextMedium'>BLOG</Link>
-                        <Link to='/' className='navTextMedium'>COMMUNITY</Link>
-                        <Link to='/' className='navTextMedium'>SUPPORT</Link>
-                        {adminProtalLink}
+
+                    <div style={{ "width": "500px" }} className={`flexRow desktopNav`}>
+                        <Link to='/' className='navTextMedium'>PRODUCTS</Link>
+                        <Link to='/community' className='navTextMedium'>COMMUNITY</Link>
+                        <Link to='/support' className='navTextMedium'>SUPPORT</Link>
+                        <Link to='/about' className='navTextMedium'>ABOUT</Link>
                     </div>
-                    <div style={{ "width": "150px" }} className='flexRow'>
+
+                    <div className={`mobileNav`}>
+                        <img className={`hamMenu`} src={hamMenu} alt='hamburger menu' onClick={(e)=>this.setState({showMobileDropdown: !this.state.showMobileDropdown})} />
+
+                        { this.state.showMobileDropdown ? 
+                            <div className='mobileDropdown'>
+                                <p><Link to='/'>PRODUCTS</Link></p>
+                                <p><Link to='/community'>COMMUNITY</Link></p>
+                                <p><Link to='/support'>SUPPORT</Link></p>
+                                <p><Link to='/about'>ABOUT</Link></p>
+                            </div>
+                        : null
+                        }
+                    </div>
+
+                    <div className={`flexRow rightMenu`}>
                         {loginIcon}
                         <Link to='/cart'><img className='aLink' style={{ "height": "20px" }} src="https://d30y9cdsu7xlg0.cloudfront.net/png/5641-200.png" alt="" /></Link>
-                        <img className='aLink' style={{ "height": "20px" }} src="https://maxcdn.icons8.com/Share/icon/p1em/Very_Basic//search1600.png" alt="" />
+                        <img className={`aLink searchGlass`} src="https://maxcdn.icons8.com/Share/icon/p1em/Very_Basic//search1600.png" alt="" />
                     </div>
                 </div>
                 <LoginLanding   showLogin={this.state.showLogin}

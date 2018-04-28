@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
-import MainHeader from './../Headers/MainHeader.js';
+import MainHeader from './../../components/Headers/MainHeader.js';
 import ProductsFilterHeader from './ProductsFilterHeader.js';
 import ProductsLandingProducts from './ProductsLandingProducts.js';
-import MainFooter from './../Footers/MainFooter.js';
+import MainFooter from './../../components/Footers/MainFooter.js';
 
 
 class ProductsLanding extends Component {
@@ -12,7 +12,7 @@ class ProductsLanding extends Component {
     this.state = {
       attributeToShow:'All'
     }
-    //bind shit here
+    
     this.updateAttributeToShow = this.updateAttributeToShow.bind(this);
   }
 

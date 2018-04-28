@@ -1,3 +1,3 @@
-select * from cart 
-JOIN products ON products.id = cart.productid
+select * from amazoncart 
+JOIN amazonproducts ON amazonproducts.id = amazoncart.productid
 where userid = 1

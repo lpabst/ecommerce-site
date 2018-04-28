@@ -49,7 +49,7 @@ class LandingTeaserStories extends Component {
                 }
             ]
         }
-        //bind shit here
+        // 
     }
 
 

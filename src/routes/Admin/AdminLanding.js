@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import axios from 'axios';
 import {Link} from 'react-router-dom';
-import MainHeader from './../Headers/MainHeader.js';
+import MainHeader from './../../components/Headers/MainHeader.js';
 import AdminDeleteProducts from './AdminDeleteProducts.js';
 
 import './AdminLanding.css';
@@ -18,70 +18,62 @@ class AdminLanding extends Component {
       descriptionInput: '',
       priceInput: '',
       attributesInput: 'All',
-      editClicked: false
+      editClicked: false,
+      loadingPage: true,
     }
-    //bind shit here
-    this.handleImageInput = this.handleImageInput.bind(this);
-    this.handleTitleInput = this.handleTitleInput.bind(this);
-    this.handleDescriptionInput = this.handleDescriptionInput.bind(this);
-    this.handlePriceInput = this.handlePriceInput.bind(this);
-    this.handleAttributesInput = this.handleAttributesInput.bind(this);
+    
     this.submit = this.submit.bind(this);
     this.editProduct = this.editProduct.bind(this);
     this.cancelEdit = this.cancelEdit.bind(this);
   }
 
-  handleImageInput(e){
-    this.setState({
-      imageInput: e.target.value
-    })
-  }
+  componentDidMount(){
+    axios.get('/api/isAdmin')
+    .then( res => {
+      let {isAdmin} = res.data;
 
-  handleTitleInput(e){
-    this.setState({
-      titleInput: e.target.value
+      if (isAdmin){
+        this.setState({
+          loadingPage: false,
+        })
+      }else{
+        document.querySelector('.mainHeaderWrapper a').click();
+      }
+
     })
-  }
-  handleDescriptionInput(e){
-    this.setState({
-      descriptionInput: e.target.value
-    })
-  }
-  handlePriceInput(e){
-    this.setState({
-      priceInput: e.target.value
-    })
-  }
-  handleAttributesInput(e){
-    this.setState({
-      attributesInput: e.target.value
-    })
+    .catch(err => {
+      document.querySelector('.mainHeaderWrapper a').click();
+    });
   }
 
   submit() {
     if(this.state.editClicked){
-      axios.patch('/api/updateProduct', { "productID": this.state.productID,
-                                          "title": this.state.titleInput, 
-                                          "description": this.state.descriptionInput, 
-                                          "price": this.state.priceInput, 
-                                          "image": this.state.imageInput, 
-                                          "attributes": this.state.attributesInput})
-          .then(res => {
-            alert(res.data);
-            this.cancelEdit();
-            this.child.componentDidMount()
-          })
+      axios.patch('/api/updateProduct', { 
+        "productID": this.state.productID,
+        "title": this.state.titleInput, 
+        "description": this.state.descriptionInput, 
+        "price": this.state.priceInput, 
+        "image": this.state.imageInput, 
+        "attributes": this.state.attributesInput
+      })
+      .then(res => {
+        alert(res.data);
+        this.cancelEdit();
+        this.child.componentDidMount()
+      })
     } else {
-      axios.post('/api/addProduct', { "title": this.state.titleInput, 
-                                      "description": this.state.descriptionInput, 
-                                      "price": this.state.priceInput, 
-                                      "image": this.state.imageInput, 
-                                      "attributes": this.state.attributesInput})
-          .then(res => {
-            alert(res.data);
-            this.cancelEdit();
-            this.child.componentDidMount()
-          })
+      axios.post('/api/addProduct', { 
+        "title": this.state.titleInput, 
+        "description": this.state.descriptionInput, 
+        "price": this.state.priceInput, 
+        "image": this.state.imageInput, 
+        "attributes": this.state.attributesInput
+      })
+      .then(res => {
+        alert(res.data);
+        this.cancelEdit();
+        this.child.componentDidMount()
+      })
     }
   }
 
@@ -121,45 +113,57 @@ class AdminLanding extends Component {
     let defaultPrice = 'Price'
 
     return (
-      <section className="">
-        <MainHeader />
-        <div className='clCartHeader'>
-          <h1>Admin Portal</h1>
-        </div> 
-        <div className='alAddNewProductSectionParent'>
-          <div className='alAddNewProductSection'>
-            <div className='alInputsWrapper'>
-              <h1>Image Source</h1>
-              <input value={this.state.imageInput} onChange={this.handleImageInput} type="text"/>
-              <br/>
-              <h1>Title</h1>
-              <input value={this.state.titleInput} onChange={this.handleTitleInput} type="text"/>
-              <br/>
-              <h1>Description</h1>
-              <textarea value={this.state.descriptionInput} onChange={this.handleDescriptionInput} type="text"/>
-              <br/>
-              <h1>Price</h1>
-              <input value={this.state.priceInput} onChange={this.handlePriceInput} type="text"/>
-              <br/>
-              <h1>Attributes (Attributes should be capitalized and separated by a space only.)</h1>
-              <input value={this.state.attributesInput} onChange={this.handleAttributesInput} type="text"/>
-              <br/>
-              <button onClick={this.submit}>Submit</button>
-              {cancelEdit}
-            </div>
-            <br/>
-            <div className='alProductPreview'>
-              <div style={{"width":"420px"}} className='plpSingleProductWrapper'>
-                  <img src={this.state.imageInput === '' ? defaultImage : this.state.imageInput} alt="" />
-                  <h1>{this.state.titleInput === '' ? defaultTitle : this.state.titleInput}</h1>
-                  <p>{this.state.descriptionInput === '' ? defaultDescription : this.state.descriptionInput}</p>
-                  <h3>{this.state.priceInput === '' ? defaultPrice : this.state.priceInput}</h3>
-                  <h5>Buy Now</h5>
+      <section className="routeWrapper">
+      
+        { this.state.loadingPage ? 
+            <div>
+              <MainHeader />
+              <div className='loadingMessage'>
+                <p>Loading...</p>
               </div>
             </div>
-          </div>
-        </div>
-        <AdminDeleteProducts onRef={ref => (this.child = ref)} editProduct={this.editProduct}/>  
+          : <div>
+              <MainHeader />
+              <div className='clCartHeader'>
+                <h1>Admin Portal</h1>
+              </div> 
+              <div className='alAddNewProductSectionParent'>
+                <div className='alAddNewProductSection'>
+                  <div className='alInputsWrapper'>
+                    <h1>Image Source</h1>
+                    <input value={this.state.imageInput} onChange={(e) => this.setState({imageInput: e.target.value})} type="text"/>
+                    <br/>
+                    <h1>Title</h1>
+                    <input value={this.state.titleInput} onChange={(e) => this.setState({titleInput: e.target.value})} type="text"/>
+                    <br/>
+                    <h1>Description</h1>
+                    <textarea value={this.state.descriptionInput} onChange={(e) => this.setState({descriptionInput: e.target.value})} type="text"/>
+                    <br/>
+                    <h1>Price</h1>
+                    <input value={this.state.priceInput} onChange={(e) => this.setState({priceInput: e.target.value})} type="text"/>
+                    <br/>
+                    <h1>Attributes (Attributes can be separated by a space, a comma, or any symbol of your choice)</h1>
+                    <input value={this.state.attributesInput} onChange={(e) => this.setState({attributesInput: e.target.value})} type="text"/>
+                    <br/>
+                    <button onClick={this.submit}>Submit</button>
+                    {cancelEdit}
+                  </div>
+                  <br/>
+                  <div className='alProductPreview'>
+                    <div style={{"width":"420px"}} className='plpSingleProductWrapper'>
+                        <img src={this.state.imageInput === '' ? defaultImage : this.state.imageInput} alt="" />
+                        <h1>{this.state.titleInput === '' ? defaultTitle : this.state.titleInput}</h1>
+                        <p>{this.state.descriptionInput === '' ? defaultDescription : this.state.descriptionInput}</p>
+                        <h3>${this.state.priceInput === '' ? defaultPrice : this.state.priceInput}</h3>
+                        <h5>Buy Now</h5>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <AdminDeleteProducts onRef={ref => (this.child = ref)} editProduct={this.editProduct}/>  
+            </div>
+        }
+
       </section>
     );
   }

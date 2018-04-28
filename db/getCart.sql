@@ -1,2 +1,2 @@
-select * from cart
+select * from amazoncart
 where userid = $1

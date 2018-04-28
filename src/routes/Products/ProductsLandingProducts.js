@@ -9,17 +9,20 @@ class ProductsLandingProducts extends Component {
         super(props)
 
         this.state = {
-            products: []
+            products: [],
+            loadingProducts: true,
         }
-        //bind shit here
+        
         this.addToCart = this.addToCart.bind(this);
     }
 
     componentDidMount() {
         axios.get(`/api/getProducts`)
             .then(res => {
+                console.log(res);
                 this.setState({
-                    products: res.data
+                    products: res.data,
+                    loadingProducts: false,
                 })
             })
     }
@@ -35,24 +38,31 @@ class ProductsLandingProducts extends Component {
         let products;
         if (this.state.products.length) {
             products = this.state.products.map((product, i) => {
-                if (product.attributes.indexOf(this.props.attributeToShow) > -1) {
+
+                // creates a pattern (case doesn't matter) that we can match to filter products by category
+                let categoryFilterPattern = new RegExp(this.props.attributeToShow, 'i');
+                
+                // for each product, check if it's attributes contain the pattern we are matching
+                if (product.attributes.match(categoryFilterPattern)) {
                     return (
                         <div draggable="true" className='plpSingleProductWrapper' key={i}>
                             <img src={product.image} alt="" />
                             <h1>{product.title}</h1>
                             <p>{product.description}</p>
-                            <h3>{product.price}</h3>
+                            <h3>${product.price}</h3>
                             <h5 onClick={() => this.addToCart(product.id, product.title)}>Buy Now</h5>
                         </div>
                     )
                 }
+
             })
+        }else if (this.state.loadingProducts){
+            products = <div className='plpSingleProductWrapper'><h1>Loading Products...</h1></div>
         } else {
             products =
                 <div className='plpSingleProductWrapper'>
                     <h1>No 'products' in the database were found</h1>
                 </div>
-
         }
 
         return (

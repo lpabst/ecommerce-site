@@ -20,17 +20,16 @@ app.use(session({
 massive(config.connection)
 .then(db => {
   app.set('db', db);
-})
+}).catch(err=>{});
 
-app.use(express.static(__dirname + './../build'))
-
-var userController = require("./userController.js");
+app.use(express.static(__dirname + './../build'));
 
 //////////Endpoints for the front end
 const mainController = require('./mainController.js');
 
 app.get('/api/getProducts', mainController.getProducts);
 app.get('/api/getProductsInCart', mainController.getProductsInCart);
+app.get('/api/isAdmin', mainController.isAdmin);
 app.post('/api/login', mainController.login);
 app.post('/api/addToCart', mainController.addToCart);
 app.post('/api/addProduct', mainController.addProduct);

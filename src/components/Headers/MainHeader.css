@@ -1,11 +1,89 @@
 .mainHeaderWrapper{
     height: 60px;
     width: 100%;
-    /*background: pink;*/
+    overflow: hidden;
     display: flex;
     justify-content: space-between;
     padding: 0 20px 0 20px;
 }
 .mainHeaderWrapper ul:hover{
     border-bottom: 5px solid grey;
+}
+
+.headerLogo{
+    width: 200px;
+    height: auto;
+    margin-top: 5px;
+}
+
+.mobileNav{
+    width: 60px;
+    height: 60px;
+    display: none;
+    position: absolute;
+}
+
+.hamMenu{
+    width: 40px;
+    height: 40px;
+    position: absolute;
+    top: 10px;
+    left: 10px;
+}
+
+.rightMenu{
+    width: 150px;
+}
+
+.searchGlass{
+    height: 20px;
+}
+
+.mobileDropdown{
+    width: 200px;
+    height: auto;
+    padding: 20px 5px;
+    background: #fff;
+    position: absolute;
+    top: 60px;
+    left: -20px;
+    border-top: 1px solid black;
+    z-index: 5555;
+}
+
+.mobileDropdown p{
+    width: 100%;
+    text-align: center;
+    margin: 8px 0px 8px 0px;
+}
+
+.mobileDropdown a{
+    color: #000;
+    text-decoration: none;
+    font-size: 19px;
+}
+
+.mobileDropdown a:hover{
+    text-decoration: underline;
+}
+
+@media(max-width: 815px){
+    .headerLogo{
+        width: 50px;
+        margin-top: 25px;
+        position: absolute;
+        left: calc(50% - 25px);
+    }
+    .desktopNav{
+        display: none !important;
+    }
+    .mobileNav{
+        display: block;
+    }
+    .rightMenu{
+        width: 60px;
+    }
+    .searchGlass{
+        display: none;
+    }
 }

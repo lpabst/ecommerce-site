@@ -1,3 +1,3 @@
-# E-Commerce Site 
+# Ecommerce Site
 
-An e-commerce site for listing and selling products online. Complete with a fully functioning CMS
+An e-commerce site for listing and selling products, complete with a fully functional CMS
