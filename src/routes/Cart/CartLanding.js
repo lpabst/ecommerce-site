@@ -35,7 +35,7 @@ class CartLanding extends Component {
     price = parseFloat(price.split(',').join(''))
     let total = price * qnt;
     
-    return total.toLocaleString();
+    return total
   }
 
   // go through the products in the cart, get the price for each product, remove $ and commas, multiply by qnt, 
@@ -50,7 +50,7 @@ class CartLanding extends Component {
       total += (price * arr[i].quantity);
     }
     
-    return total.toLocaleString();
+    return total
   }
 
   render() {
@@ -64,9 +64,9 @@ class CartLanding extends Component {
               <img src={product.image} alt=""/>
             </div>
             <div className='clCart2' >{product.title}</div>
-            <div className='clCart3' >{product.price}</div>
+            <div className='clCart3' >${product.price}</div>
             <div className='clCart4' >{product.quantity}</div>
-            <div className='clCart5' >${total}</div>
+            <div className='clCart5' >${(total.toFixed(2)).toLocaleString()}</div>
           </div>          
         )
       }): null;
@@ -104,10 +104,10 @@ class CartLanding extends Component {
                   <h3>Order Total</h3>    
                 </div>
                 <div>
-                  <h1>${subTotal}</h1>    
-                  <h1>${(subTotal*.065).toFixed(2)}</h1>    
+                  <h1>${subTotal.toLocaleString()}</h1>    
+                  <h1>${((subTotal*.065).toFixed(2)).toLocaleString()}</h1>    
                   <h1>$0.00</h1>    
-                  <h3>${(subTotal*1.065).toFixed(2)}</h3>
+                  <h3>${((subTotal*1.065).toFixed(2)).toLocaleString()}</h3>
                 </div>
               </div>
             </div>

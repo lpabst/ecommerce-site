@@ -135,6 +135,9 @@
   .clContentSection{
     padding: 0px;
   }
+  .clContentSingleItem div{
+    font-size: 14px;
+  }
   .clCheckoutSection{
     padding: 30px 0px;
   }
