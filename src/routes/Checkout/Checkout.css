@@ -29,6 +29,12 @@
     font-size: 12px;
 }
 
+.checkoutSummary h2{
+    font-size: 20px;
+    font-weight: bold;
+    text-align: center;
+}
+
 .checkoutSummary span{
     font-size: 15px;
     text-decoration: underline;

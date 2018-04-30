@@ -68,7 +68,7 @@ class LoginLanding extends Component {
             <input value={this.state.usernameInput} onChange={this.handleUsernameInput} type="text"/>
             <br/>
             <h1>Enter Password</h1>
-            <input value={this.state.passwordInput} onChange={this.handlePasswordInput} type="text"/>
+            <input value={this.state.passwordInput} onChange={this.handlePasswordInput} type="password"/>
             <button onClick={this.login}>Login</button>
             <Link to='/signup' style={{marginLeft: '10px'}}><button>Sign Up</button></Link>
             <br/>
