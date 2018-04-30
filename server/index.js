@@ -26,7 +26,6 @@ app.use(express.static(__dirname + './../build'));
 
 //////////Endpoints for the front end
 const mainController = require('./mainController.js');
-
 app.get('/api/getProducts', mainController.getProducts);
 app.get('/api/getProductsInCart', mainController.getProductsInCart);
 app.get('/api/isAdmin', mainController.isAdmin);
@@ -37,6 +36,8 @@ app.delete('/api/deleteProduct', mainController.deleteProduct);
 app.patch('/api/updateProduct', mainController.updateProduct);
 
 
+const supportController = require('./supportController.js'); 
+app.post('/api/supportTicket', supportController.supportTicket);
 
 
 app.listen(config.port, console.log("you are now connected on " + config.port));
