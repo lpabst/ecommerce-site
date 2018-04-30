@@ -22,7 +22,7 @@ var accountController = {
                     req.session.isAdmin = false
                 }
 
-                return res.status(200).send({error: false, message: 'Success', response: response})
+                return res.status(200).send({error: false, message: 'Success', user: response})
             } else {
                 return res.status(200).send({error: true, message: 'Invalid username or password.'})
             }            
@@ -36,7 +36,6 @@ var accountController = {
         const db = req.app.get('db');
 
         let {firstName, lastName, email, password, confirmPassword} = req.body;
-        console.log(firstName, lastName, email, password, confirmPassword)
 
         // Error handling
         if (!firstName || !lastName){
@@ -67,7 +66,7 @@ var accountController = {
         db.findUserByEmail([email])
         .then( response => {
             if(response.length){
-                return res.status(200).send({error: true, message: 'That username has already been taken'})
+                return res.status(200).send({error: true, message: 'That email already has an account'})
             } else {      
                 // If the username isn't being used, create the account
                 db.createAccount([email, password, firstName, lastName])

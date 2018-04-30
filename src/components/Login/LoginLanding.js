@@ -22,31 +22,19 @@ class LoginLanding extends Component {
 
   login(){
     axios.post(`/api/login`, {"username":this.state.usernameInput, "userpassword":this.state.passwordInput})
-    .then( res => {
+    .then( res => {      
       if (res.data.error && res.data.message){
         alert(res.data.message);
-      }else if (!res.data.response || !res.data.response[0] || res.data.error){
+      }else if (!res.data.user || !res.data.user[0] || res.data.error){
         alert('We encountered an unexpected error, please try again');
-      }
-      else if(res.data.response[0].isadmin){
-        this.setState({
-          adminLogin: true,
-          usernameInput: '',
-          passwordInput: ''
-        })
-        this.props.updateIsAdmin(true, res.data.response[0].firstname);
-      } else if (res.data.length && !res.data.response[0].isadmin) {
-        this.setState({
-          adminLogin: false,
-          usernameInput: '',
-          passwordInput: ''
-        })
-        this.props.updateIsAdmin(false, res.data.response[0].firstname)
-      }
-      if(res.data.length){
+      } else if(res.data.user){
+        let {firstname, isadmin} = res.data.user[0];
+        
+        this.setState({adminLogin: isadmin, usernameInput: '', passwordInput: ''})
+        this.props.updateIsAdmin(isadmin, firstname);
         this.props.updateShowLogin();
         this.props.updateCart();
-      }
+      } 
     })   
   }
 

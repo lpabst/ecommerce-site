@@ -61,6 +61,7 @@ class Signup extends Component {
         axios.post('/api/createAccount', createAccountData)
         .then( res => {
             if (res.data.error){
+                console.log(res.data);
                 return this.setState({
                     errorMessage: res.data.message,
                     successMessage: '',
@@ -109,7 +110,7 @@ class Signup extends Component {
 
                         <div className='showPasswordBox'>
                             <input type='checkbox' checked={this.state.showPasswordText} onChange={(e)=>this.setState({showPasswordText: !this.state.showPasswordText})} />
-                            <p>Show Password Text</p>
+                            <p onClick={(e)=>this.setState({showPasswordText: !this.state.showPasswordText})} >Show Password Text</p>
                         </div>
 
                         <button onClick={() => this.createAccount()} >Create Account</button>

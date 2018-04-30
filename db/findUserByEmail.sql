@@ -1,2 +1,2 @@
 select * from amazonusers 
-where email ilike $1
+where username ilike $1
