@@ -1,7 +1,8 @@
 import React, { Component } from'react';
-import MainHeader from './../../components/MainHeader/MainHeader.js';
-import PageNameHeader from './../../components/PageNameHeader/PageNameHeader.js';
 import './Support.css';
+
+import MainHeader from './../../components/Headers/MainHeader.js';
+import MainFooter from './../../components/Footers/MainFooter.js';
 
 import axios from 'axios';
 
@@ -13,6 +14,7 @@ class Support extends Component {
         this.state = {
             email: ``,
             issue: ``,
+            errorMessage: '',
             issueSubmitted: false,
             errorSubmittingIssue: false,
         }
@@ -22,6 +24,16 @@ class Support extends Component {
     }
 
     submitIssue(){
+        let {email, issue} = this.state;
+
+        if (!issue){
+            return this.setState({errorMessage: 'Please tell us a little bit about the issue you are seeing'})
+        }
+
+        if (!email.match(/^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/)){
+            return this.setState({errorMessage: 'That email address appears to be invalid'})
+        }
+
         axios.post(`/api/supportTicket`, {
             email: this.state.email,
             issue: this.state.issue
@@ -41,6 +53,7 @@ class Support extends Component {
         this.setState({
             email: ``,
             issue: ``,
+            errorMessage: '',
             issueSubmitted: false,
             errorSubmittingIssue: false,
         })
@@ -51,11 +64,10 @@ class Support extends Component {
             <section className={`routeWrapper`}>
                 
                 < MainHeader />
-                < PageNameHeader>
-                    {() => (
-                        <h1>Support</h1>
-                    )}
-                </ PageNameHeader >
+
+                <div className='clCartHeader'>
+                    <h1>Support</h1>
+                </div>   
 
                 <div className='support_fullscreen_background'>
 
@@ -78,6 +90,7 @@ class Support extends Component {
                     { !this.state.issueSubmitted && !this.state.errorSubmittingIssue &&
                         <div className={`supportModal normalModal`}>
                             <p>We`re here to help you. Send us a message any time, day or night, and know that we`re working hard to resolve your concerns</p>
+                            <p className='errorMessage' >{this.state.errorMessage}</p>
                             <input placeholder={`your email`} onChange={(e) => this.setState({email: e.target.value})} value={this.state.email} />
                             <textarea placeholder={`type your concern here...`} onChange={(e) => this.setState({issue: e.target.value})}  value={this.state.issue} />
                             <button onClick={this.submitIssue} >Submit</button>
@@ -85,6 +98,9 @@ class Support extends Component {
                     }
 
                 </div>
+
+                <MainFooter/>
+
             </section>
         );
     }

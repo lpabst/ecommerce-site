@@ -46,21 +46,26 @@
 }
 
 .successModal{
-    height: 200px;
+    min-height: 200px;
     top: 5px;
-    background: #ce3960;
+    background: #B0C2D8;
 }
 
 .errorModal{
-    height: 200px;
+    min-height: 200px;
     top: 5px;
-    background: #ce3960;
+    background: #B0C2D8;
 }
 
 .normalModal{
-    height: 400px;
+    min-height: 400px;
     top: 5px;
-    background: #ce3960;
+    background: #B0C2D8;
+}
+
+.errorMessage{
+    color: rgb(248, 39, 11);
+    margin-top: 5px;
 }
 
 @media(min-width: 815px){
@@ -79,6 +84,6 @@
 
 @media(min-height: 600px){
     .support_fullscreen_background{
-        min-height: calc(100vh - 135px);
+        min-height: calc(100vh - 120px);
     }
 }
