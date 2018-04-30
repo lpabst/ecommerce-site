@@ -66,7 +66,7 @@ var accountController = {
         db.findUserByEmail([email])
         .then( response => {
             if(response.length){
-                return res.status(200).send({error: true, message: 'That email already has an account'})
+                return res.status(200).send({error: true, message: 'We already have an account in our system with that email address'})
             } else {      
                 // If the username isn't being used, create the account
                 db.createAccount([email, password, firstName, lastName])
