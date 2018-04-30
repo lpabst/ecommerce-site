@@ -19,8 +19,12 @@
 }
 
 .nameBox input{
-    width: 130px;
-    display: inline-block;
+    width: 110px !important;
+    display: inline-block !important;
+}
+
+.nameBox input:first-of-type{
+    margin-right: 15px !important;
 }
 
 .signupModal input{
