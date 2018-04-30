@@ -60,15 +60,21 @@ class Signup extends Component {
 
         axios.post('/api/createAccount', createAccountData)
         .then( res => {
+            console.log(res.data);
             if (res.data.error){
-                console.log(res.data);
                 return this.setState({
                     errorMessage: res.data.message,
                     successMessage: '',
                 })
             }else{
+                let loginImg = document.querySelector('#root > div > section > section:nth-child(1) > div > div.flexRow.rightMenu > img:nth-child(1)');
+                if (loginImg){
+                    loginImg.click();
+                    document.querySelector('#loginLandingSection > div > input[type="text"]:nth-child(2)').focus();
+                }
+
                 return this.setState({
-                    successMessage: 'Success! You will receive an email shortly to confirm your account',
+                    successMessage: 'Success! You will receive an email shortly to confirm your account. You can now login and begin shopping',
                     errorMessage: '',
                 });
             }

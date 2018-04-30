@@ -34,6 +34,11 @@ class LoginLanding extends Component {
         this.props.updateIsAdmin(isadmin, firstname);
         this.props.updateShowLogin();
         this.props.updateCart();
+
+        // If user just sign up, or is on the sign in page, navigate them to the products page (if the products nav link also exists)
+        if (window.location.href.match(/signup/) && document.querySelector('#root > div > section > section:nth-child(1) > div > div.flexRow.desktopNav > a:nth-child(1)')){
+          document.querySelector('#root > div > section > section:nth-child(1) > div > div.flexRow.desktopNav > a:nth-child(1)').click();
+        }
       } 
     })   
   }

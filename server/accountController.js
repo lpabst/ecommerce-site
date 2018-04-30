@@ -74,8 +74,7 @@ var accountController = {
         
                     // Need to send confirmation email to their email account here
                     
-                    res.status(200).send({error: false, message: 'Success'});
-                    return this.login(req, res);
+                    return res.status(200).send({error: false, message: 'Success!'});
                 })
                 .catch(err=>{
                     return res.status(200).send({error: true, message: 'We encountered an unexpectd error creating your account', err: err});
