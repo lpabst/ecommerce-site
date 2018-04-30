@@ -1,0 +1,63 @@
+
+.signupPageContent{
+    min-height: calc(100vh - 120px);
+    padding: 50px 20px;
+}
+
+.signupModal{
+    width: 300px;
+    height: auto;
+    padding: 20px 20px;
+    border-radius: 5px;
+    box-shadow: 2px 2px 4px black;
+    margin: 0 auto;
+}
+
+.signupModal h1{
+    font-weight: bold;
+    margin-bottom: 6px;
+}
+
+.signupModal input{
+    width: 250px;
+    height: 20px;
+    line-height: 18px;
+    padding-left: 5px;
+    font-size: 16px;
+    margin-bottom: 10px;
+    display: block;
+}
+
+.smallDetails{
+    font-size: 12px;
+}
+
+.errorMessage{
+    color: rgb(248, 39, 11);
+}
+
+.successMessage{
+    color: green;
+}
+
+.showPasswordBox input{
+    width: 16px;
+    height: 16px;
+    display: inline-block;
+    margin: 0px 4px 15px 0px;
+    cursor: pointer;
+}
+
+.showPasswordBox p{
+    width: 180px;
+    display: inline-block;
+    font-size: 14px;
+    position: relative;
+    top: -3px;
+}
+
+@media(min-width:815px){
+    .signupPageContent{
+        padding-top: calc(50vh - 300px);
+    }
+}

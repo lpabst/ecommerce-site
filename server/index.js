@@ -24,12 +24,16 @@ massive(config.connection)
 
 app.use(express.static(__dirname + './../build'));
 
-//////////Endpoints for the front end
+/******************** Controllers / Endpoints for the front end **********************/
+const accountController = require('./accountController.js');
+app.get('/api/isAdmin', accountController.isAdmin);
+app.post('/api/login', accountController.login);
+app.post('/api/createAccount', accountController.createAccount);
+
+
 const mainController = require('./mainController.js');
 app.get('/api/getProducts', mainController.getProducts);
 app.get('/api/getProductsInCart', mainController.getProductsInCart);
-app.get('/api/isAdmin', mainController.isAdmin);
-app.post('/api/login', mainController.login);
 app.post('/api/addToCart', mainController.addToCart);
 app.post('/api/addProduct', mainController.addProduct);
 app.delete('/api/deleteProduct', mainController.deleteProduct);

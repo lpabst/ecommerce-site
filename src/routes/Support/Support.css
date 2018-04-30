@@ -63,11 +63,6 @@
     background: #B0C2D8;
 }
 
-.errorMessage{
-    color: rgb(248, 39, 11);
-    margin-top: 5px;
-}
-
 @media(min-width: 815px){
     .successModal{
         top: calc(50% - 100px);

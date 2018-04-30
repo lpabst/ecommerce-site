@@ -1,9 +1,9 @@
 import React, { Component } from 'react';
 import axios from 'axios';
-import MainHeader from './../../components/Headers/MainHeader.js';
-import MainFooter from './../../components/Footers/MainFooter.js';
 import './Checkout.css'
 
+import MainHeader from './../../components/Headers/MainHeader.js';
+import MainFooter from './../../components/Footers/MainFooter.js';
 
 class Checkout extends Component {
 
