@@ -8,6 +8,7 @@ import About from './routes/About/About.js';
 import AdminLanding from './routes/Admin/AdminLanding.js';
 import CartLanding from './routes/Cart/CartLanding.js';
 import Checkout from './routes/Checkout/Checkout.js';
+import Signup from './routes/Signup/Signup.js';
 import UnderConstruction from './routes/UnderConstruction/UnderConstruction.jsx';
 
 export default (
@@ -19,9 +20,9 @@ export default (
         <Route component={ AdminLanding } path='/admin' exact />
         <Route component={ CartLanding } path='/cart' exact />
         <Route component={ Checkout } path='/checkout' exact />
+        <Route component={ Signup } path='/signup' exact />
         <Route component={ UnderConstruction }path='/community' exact />
         <Route component={ UnderConstruction } path='/terms' exact />
-        <Route component={ UnderConstruction } path='/signup' exact />
         <Route component={ ProductsLanding } />
 
     </Switch>
