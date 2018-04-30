@@ -17,13 +17,12 @@ mainController = {
     getProductsInCart: function(req, res){
         const db = req.app.get('db');
         if(req.session.isLoggedIn){
-            db.getProductsInCart()
+            db.getProductsInCart([req.session.user])
             .then( productsInCart => {
                 return res.status(200).send( productsInCart )
             })
             .catch(err => {
-                
-                res.status(500).send(err)
+                res.status(500).send({error: true, message: err})
             })
         } else {
             return res.status(200).send([])
@@ -50,7 +49,7 @@ mainController = {
                     req.session.isAdmin = false
                 }
             } else {
-                return res.status(200).send('Invalid username or password.')
+                return res.status(200).send({error: true, message: 'Invalid username or password.'})
             }
             
             
@@ -67,7 +66,12 @@ mainController = {
     },
 
     addToCart: function(req, res){
-        const db = req.app.get('db');        
+        const db = req.app.get('db');   
+
+        if (!req.session.user){
+            return res.status(200).send({error: true, message: 'Must be logged in to add items to your cart'});
+        }     
+
         db.getCart([req.session.user])
         .then( response => {
             for(let i=0; i<response.length; i++){
@@ -76,14 +80,14 @@ mainController = {
                     quantity++;
                     db.addOneToQuantityInCart([req.body.productID, quantity, req.session.user])
                     .then(response => {
-                       return res.status(200).send(response)
+                        return res.status(200).send({res: response, message: 'successfully increased number in cart'})
                     })
                     return
                 }
             }
             db.addProductToCart([req.body.productID, req.session.user])
             .then( response => {
-                return res.status(200).send(response)
+                return res.status(200).send({res: response, message: 'successfully added 1st one to cart'})
             }).catch(err=>{});
             
         }).catch(err=>{});

@@ -14,36 +14,42 @@ class CartLanding extends Component {
     this.state = {
       productsInCart:[]
     }
-    // 
+
+    this.getProductsInCart = this.getProductsInCart.bind(this); 
   }
 
   componentDidMount() {
+    this.getProductsInCart();
+  }
+
+  getProductsInCart(){
     axios.get(`/api/getProductsInCart`)
       .then(res => {
-        this.setState({
-            productsInCart: res.data
-        })
+        this.setState({ productsInCart: res.data })
       })
   }
 
-  productTotal(str, qnt){
-    let total = str;
-    total = total.split('$')[1]
-    total = parseInt(total.split(',').join(''))
-    total = total * qnt
-    total = total.toLocaleString()
+  // remove $ and commas, then multiply price*qnt and return it formatted for the locale
+  productTotal(price, qnt){
+    price = price.replace('$', '');
+    price = parseFloat(price.split(',').join(''))
+    let total = price * qnt;
+    
     return total
   }
 
+  // go through the products in the cart, get the price for each product, remove $ and commas, multiply by qnt, 
+  // then add it to the running total. at the end, format based on locale
   orderTotal(){
-    let x = this.state.productsInCart;
+    let arr = this.state.productsInCart;
     let total = 0;
-    for(let i=0; i<x.length; i++){
-      let iteration = x[i].price.split('$')[1];
-      iteration = parseInt(iteration.split(',').join(''));
-      total = total + (iteration * x[i].quantity);
+    
+    for(let i=0; i<arr.length; i++){
+      let price = arr[i].price.replace('$', '');
+      price = parseFloat(price.split(',').join(''));
+      total += (price * arr[i].quantity);
     }
-    total = total.toLocaleString();
+    
     return total
   }
 
@@ -54,35 +60,36 @@ class CartLanding extends Component {
         let total = this.productTotal(product.price, product.quantity)
         return (
           <div className='clContentSingleItem' key={i}>
-            <div style={{"width":"12%"}}>
+            <div  className='clCart1' >
               <img src={product.image} alt=""/>
             </div>
-            <div style={{"width":"53%"}}>{product.title}</div>
-            <div style={{"width":"10%"}}>{product.price}</div>
-            <div style={{"width":"15%"}}>{product.quantity}</div>
-            <div style={{"width":"10%"}}>${total}.00</div>
+            <div className='clCart2' >{product.title}</div>
+            <div className='clCart3' >${product.price}</div>
+            <div className='clCart4' >{product.quantity}</div>
+            <div className='clCart5' >${(total.toFixed(2)).toLocaleString()}</div>
           </div>          
         )
       }): null;
 
-    let subTotal = this.state.productsInCart.length ?
-      this.orderTotal()
-      :'0.00'
+    let subTotal = this.state.productsInCart.length ? this.orderTotal() :'0.00';
 
     return (
       <section className="">
-        <MainHeader/>
+
+        <MainHeader getProductsInCart={this.getProductsInCart} />
+
         <div className='clCartHeader'>
           <h1>Shopping Cart</h1>
         </div>   
+
         <section className='clContentSection'>
           <div className='clContentWrapper'>
             <div className='clContentDescriptionHeader'>
-              <h1 style={{"width":"12%"}}></h1>
-              <h1 style={{"width":"53%"}}>Product</h1>
-              <h1 style={{"width":"10%"}}>Price</h1>
-              <h1 style={{"width":"15%"}}>Quantity</h1>
-              <h1 style={{"width":"10%"}}>Total</h1>
+              <h1 className='clCart1' > </h1>
+              <h1 className='clCart2' >Product</h1>
+              <h1 className='clCart3' >Price</h1>
+              <h1 className='clCart4' >Quantity</h1>
+              <h1 className='clCart5' >Total</h1>
             </div>
             { productsInCart }
             <div className='clCheckoutSection'> 
@@ -91,23 +98,28 @@ class CartLanding extends Component {
               </Link>
               <div className='clCheckoutWrapperRight'>
                 <div>
-                  <h1>Subtotal</h1>    
-                  <h1>Order Total Excl. Tax</h1>    
-                  <h1>incl. Tax</h1>    
+                  <h1>Subtotal</h1>      
+                  <h1>Tax</h1>    
+                  <h1>Shipping</h1>    
                   <h3>Order Total</h3>    
                 </div>
                 <div>
-                  <h1>${subTotal}.00</h1>    
-                  <h1>${subTotal}.00</h1>    
-                  <h1>0.00</h1>    
-                  <h3>${subTotal}.00</h3>
+                  <h1>${subTotal.toLocaleString()}</h1>    
+                  <h1>${((subTotal*.065).toFixed(2)).toLocaleString()}</h1>    
+                  <h1>$0.00</h1>    
+                  <h3>${((subTotal*1.065).toFixed(2)).toLocaleString()}</h3>
                 </div>
               </div>
             </div>
-            <div className='clCheckoutButton'><h1>CHECKOUT</h1></div> 
+            { this.state.productsInCart.length ?
+                <div className='clCheckoutButton'><Link to='/checkout'>CHECKOUT</Link></div> 
+              : null
+            }
           </div>
         </section>
+
         <MainFooter/>
+
       </section>
     );
   }

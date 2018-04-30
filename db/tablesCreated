@@ -29,7 +29,7 @@ create table amazoncart(
     id serial not null primary key, 
     productid integer REFERENCES amazonproducts(id),
     quantity integer,
-    username varchar(255) 
+    userid integer references amazonusers(id)
 )
 
 insert into amazonproducts (title, description, price, image, attributes) values (

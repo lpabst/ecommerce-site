@@ -5,7 +5,7 @@
 #loginLandingSection{
   position: relative;
   border-top: 1px solid #999;
-  transition: all .5s;
+  transition: all .5s linear;
 }
 #loginLandingSection div{
   width: 10%;
