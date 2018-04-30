@@ -25,26 +25,25 @@ class LoginLanding extends Component {
     .then( res => {
       if (res.data.error && res.data.message){
         alert(res.data.message);
-      }else if (!res.data[0] || res.data.error){
+      }else if (!res.data.response || !res.data.response[0] || res.data.error){
         alert('We encountered an unexpected error, please try again');
       }
-      else if(res.data[0].isadmin === true){
+      else if(res.data.response[0].isadmin){
         this.setState({
           adminLogin: true,
           usernameInput: '',
           passwordInput: ''
         })
-        this.props.updateIsAdmin(true, res.data[0].username);
-      } else if (res.data.length && res.data[0].isadmin === false) {
+        this.props.updateIsAdmin(true, res.data.response[0].firstname);
+      } else if (res.data.length && !res.data.response[0].isadmin) {
         this.setState({
           adminLogin: false,
           usernameInput: '',
           passwordInput: ''
         })
-        this.props.updateIsAdmin(false, res.data[0].username)
+        this.props.updateIsAdmin(false, res.data.response[0].firstname)
       }
       if(res.data.length){
-        // alert('Logged in as ' + res.data[0].username)
         this.props.updateShowLogin();
         this.props.updateCart();
       }
@@ -72,7 +71,7 @@ class LoginLanding extends Component {
       <section className='loginWrapper'>
         <div style={loginLandingSectionStyle} id="loginLandingSection">
           <div>
-            <h1>Enter Username</h1>
+            <h1>Enter Email</h1>
             <input value={this.state.usernameInput} onChange={this.handleUsernameInput} type="text"/>
             <br/>
             <h1>Enter Password</h1>
