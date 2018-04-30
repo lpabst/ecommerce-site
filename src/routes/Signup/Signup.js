@@ -12,6 +12,8 @@ class Signup extends Component {
         this.state = {
             errorMessage: '',
             successMessage: '',
+            firstName: '',
+            lastName: '',
             email: '',
             password: '',
             confirmPassword: '',
@@ -21,8 +23,13 @@ class Signup extends Component {
         this.createAccount = this.createAccount.bind(this);
     }
 
+    // validates field, then sends info to back end for re-validation and to create the new account
     createAccount(){
-        let {email, password, confirmPassword} = this.state;
+        let {email, password, confirmPassword, firstName, lastName} = this.state;
+
+        if (!firstName || !lastName){
+            return this.setState({errorMessage: 'Please provide your first and last name'})
+        }
 
         if (!email.match(/^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/)){
             return this.setState({errorMessage: 'Please enter a valid email address'})
@@ -49,12 +56,21 @@ class Signup extends Component {
             successMessage: 'Creating Account...'
         })
 
-        let createAccountData = {email, password, confirmPassword};
+        let createAccountData = {email, password, confirmPassword, firstName, lastName};
 
         axios.post('/api/createAccount', createAccountData)
         .then( res => {
-            console.log(res);
-            return this.setState({successMessage: 'Success! You will receive an email shortly to confirm your account'});
+            if (res.data.error){
+                return this.setState({
+                    errorMessage: res.data.message,
+                    successMessage: '',
+                })
+            }else{
+                return this.setState({
+                    successMessage: 'Success! You will receive an email shortly to confirm your account',
+                    errorMessage: '',
+                });
+            }
         })
         .catch( err => console.log(err))
 
@@ -79,16 +95,23 @@ class Signup extends Component {
                         <p className='errorMessage' >{this.state.errorMessage}</p>
                         <p className='successMessage' >{this.state.successMessage}</p>
 
+                        <div className='nameBox'>
+                            <p>Name</p>
+                            <input placeholder='First' value={this.state.firstName} onChange={(e)=>this.setState({firstName: e.target.value})} />
+                            <input placeholder='Last' value={this.state.lastName} onChange={(e)=>this.setState({lastName: e.target.value})} />
+                        </div>
                         <p>Email</p>
                         <input value={this.state.email} onChange={(e)=>this.setState({email: e.target.value})} placeholder='Email' type='text' />
                         <p>Password</p>
                         <input value={this.state.password} onChange={(e)=>this.setState({password: e.target.value})} placeholder='Password' type={this.state.showPasswordText ? 'text' : 'password'} />
                         <p>Confirm Password</p>
                         <input value={this.state.confirmPassword} onChange={(e)=>this.setState({confirmPassword: e.target.value})} placeholder='Confirm Password' type={this.state.showPasswordText ? 'text' : 'password'} />
+
                         <div className='showPasswordBox'>
-                            <input type='checkbox' checked={this.state.showPasswordText} onChange={(e)=>this.setState({showPasswordText: e.target.value})} />
+                            <input type='checkbox' checked={this.state.showPasswordText} onChange={(e)=>this.setState({showPasswordText: !this.state.showPasswordText})} />
                             <p>Show Password Text</p>
                         </div>
+
                         <button onClick={() => this.createAccount()} >Create Account</button>
                     </div>
                 </section>

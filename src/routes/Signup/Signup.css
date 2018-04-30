@@ -18,6 +18,11 @@
     margin-bottom: 6px;
 }
 
+.nameBox input{
+    width: 130px;
+    display: inline-block;
+}
+
 .signupModal input{
     width: 250px;
     height: 20px;

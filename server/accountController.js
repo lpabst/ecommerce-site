@@ -21,23 +21,58 @@ var accountController = {
                 } else {
                     req.session.isAdmin = false
                 }
+
+                return res.status(200).send({error: false, message: 'Success', response: response})
             } else {
                 return res.status(200).send({error: true, message: 'Invalid username or password.'})
-            }
-            
-            
-            return res.status(200).json( response )
+            }            
         })
         .catch(err => {
-            
-            res.status(500).send(err)
+            res.status(200).send({error: true, message: 'We encountered an unexpectd error: ' + err})
         })        
     },
 
     createAccount: (req, res) => {
         const db = req.app.get('db');
-        console.log(req.body);
-        return res.status(200).send('ok');
+
+        let {firstName, lastName, email, password, confirmPassword} = req.body;
+        console.log(firstName, lastName, email, password, confirmPassword)
+
+        // Error handling
+        if (!firstName || !lastName){
+            return res.status(200).send({error: true, message: 'Please provide your first and last name'});
+        }
+        
+        if (!email.match(/^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/)){
+            return res.status(200).send({error: true, message: 'Invalid email address'});
+        }
+        
+        if (!password || password.length < 8){
+            return res.status(200).send({error: true, message: 'Your password must be at least 8 characters long'});
+        }
+        
+        if (!password.match(/[A-Z]/)){
+            return res.status(200).send({error: true, message: 'Your password must contain at least 1 UPPERCASE Letter'});
+        }
+        
+        if (!password.match(/[a-z]/)){
+            return res.status(200).send({error: true, message: 'Your password must contain at least 1 lowercase Letter'});
+        }
+        
+        if (password !== confirmPassword){
+            return res.status(200).send({error: true, message: 'Passwords do not match. Please confirm your password in the Confirm Password box'});
+        }
+        
+        db.createAccount([email, password, firstName, lastName])
+        .then( success => {
+
+            // Need to send confirmation email to their email account here
+            
+            return res.status(200).send({error: false, message: 'Success'});
+        })
+        .catch(err=>{
+            return res.status(200).send({error: true, message: 'We encountered an unexpectd error: ' + err});
+        })
     },
 
 }
