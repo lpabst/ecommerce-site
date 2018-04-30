@@ -27,13 +27,10 @@ time, mark, audio, video {
 	user-select: none;
 }
 
-/*p{
-	font-family: 'Gentium Book Basic', serif;
+button{
+	cursor: pointer;
 }
 
-h2{
-	font-family: 'Open Sans', sans-serif;
-}*/
 /* HTML5 display-role reset for older browsers */
 article, aside, details, figcaption, figure, 
 footer, header, hgroup, menu, nav, section {

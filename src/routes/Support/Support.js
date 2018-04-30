@@ -1,11 +1,9 @@
 import React, { Component } from'react';
+import axios from 'axios';
 import './Support.css';
 
 import MainHeader from './../../components/Headers/MainHeader.js';
 import MainFooter from './../../components/Footers/MainFooter.js';
-
-import axios from 'axios';
-
 
 class Support extends Component {
 

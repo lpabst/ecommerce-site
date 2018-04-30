@@ -22,32 +22,24 @@ class LoginLanding extends Component {
 
   login(){
     axios.post(`/api/login`, {"username":this.state.usernameInput, "userpassword":this.state.passwordInput})
-    .then( res => {
+    .then( res => {      
       if (res.data.error && res.data.message){
         alert(res.data.message);
-      }else if (!res.data[0] || res.data.error){
+      }else if (!res.data.user || !res.data.user[0] || res.data.error){
         alert('We encountered an unexpected error, please try again');
-      }
-      else if(res.data[0].isadmin === true){
-        this.setState({
-          adminLogin: true,
-          usernameInput: '',
-          passwordInput: ''
-        })
-        this.props.updateIsAdmin(true, res.data[0].username);
-      } else if (res.data.length && res.data[0].isadmin === false) {
-        this.setState({
-          adminLogin: false,
-          usernameInput: '',
-          passwordInput: ''
-        })
-        this.props.updateIsAdmin(false, res.data[0].username)
-      }
-      if(res.data.length){
-        // alert('Logged in as ' + res.data[0].username)
+      } else if(res.data.user){
+        let {firstname, isadmin} = res.data.user[0];
+        
+        this.setState({adminLogin: isadmin, usernameInput: '', passwordInput: ''})
+        this.props.updateIsAdmin(isadmin, firstname);
         this.props.updateShowLogin();
         this.props.updateCart();
-      }
+
+        // If user just sign up, or is on the sign in page, navigate them to the products page (if the products nav link also exists)
+        if (window.location.href.match(/signup/) && document.querySelector('#root > div > section > section:nth-child(1) > div > div.flexRow.desktopNav > a:nth-child(1)')){
+          document.querySelector('#root > div > section > section:nth-child(1) > div > div.flexRow.desktopNav > a:nth-child(1)').click();
+        }
+      } 
     })   
   }
 
@@ -72,11 +64,11 @@ class LoginLanding extends Component {
       <section className='loginWrapper'>
         <div style={loginLandingSectionStyle} id="loginLandingSection">
           <div>
-            <h1>Enter Username</h1>
+            <h1>Enter Email</h1>
             <input value={this.state.usernameInput} onChange={this.handleUsernameInput} type="text"/>
             <br/>
             <h1>Enter Password</h1>
-            <input value={this.state.passwordInput} onChange={this.handlePasswordInput} type="text"/>
+            <input value={this.state.passwordInput} onChange={this.handlePasswordInput} type="password"/>
             <button onClick={this.login}>Login</button>
             <Link to='/signup' style={{marginLeft: '10px'}}><button>Sign Up</button></Link>
             <br/>

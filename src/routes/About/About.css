@@ -1,0 +1,54 @@
+
+.aboutSection{
+    width: 100%;
+    min-height: calc(100vh - 120px);
+    padding: 100px 20px;
+}
+
+.aboutSection1{
+    background: url('https://images.pexels.com/photos/45905/control-writing-work-official-45905.png?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260')center no-repeat;
+    background-size: cover;
+}
+
+.aboutSection2{
+    background: rgb(248, 220, 161);
+}
+
+.planePic{
+    width: 300px;
+    height: auto;
+    margin: 0 auto;
+    border-radius: 5px;
+}
+
+.aboutWidget{
+    width: 300px;
+    height: auto;
+    padding: 20px 20px;
+    border-radius: 5px;
+    box-shadow: 2px 2px 4px black;
+    margin: 0 auto;
+    background: lightblue;
+}
+
+.aboutWidget p{
+    margin: 8px 0px 8px 0px;
+}
+
+@media(min-width: 815px){
+    .aboutSection{
+        padding: calc(50vh - 200px);
+    }
+
+    .aboutWidget{
+        width: 720px;
+        font-size: 26px;
+    }
+
+    .planePic{
+        width: 720px;
+        height: auto;
+        margin: 0 auto;
+        border-radius: 5px;
+    }
+}

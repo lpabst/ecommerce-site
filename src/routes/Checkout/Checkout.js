@@ -1,9 +1,9 @@
 import React, { Component } from 'react';
 import axios from 'axios';
-import MainHeader from './../../components/Headers/MainHeader.js';
-import MainFooter from './../../components/Footers/MainFooter.js';
 import './Checkout.css'
 
+import MainHeader from './../../components/Headers/MainHeader.js';
+import MainFooter from './../../components/Footers/MainFooter.js';
 
 class Checkout extends Component {
 
@@ -58,11 +58,23 @@ class Checkout extends Component {
         // navigate user to a thank you / payment confirmation page
     }
 
+    // Validates and formats credit card number
     formatCardNum(num){
-        if (num.length !== 16){
-            return 'Invalid card number'
+        let visaPattern = /^4[0-9]{12}(?:[0-9]{3})?$/;
+        let masterCardPattern = /^(?:5[1-5][0-9]{2}|222[1-9]|22[3-9][0-9]|2[3-6][0-9]{2}|27[01][0-9]|2720)[0-9]{12}$/;
+        let discoverCardPattern = /^6(?:011|5[0-9]{2})[0-9]{12}$/;
+        let amexPattern = /^3[47][0-9]{13}$/;
+
+        if (!num.match(visaPattern) && !num.match(masterCardPattern) && !num.match(discoverCardPattern) && !num.match(amexPattern)){
+            return 'Invalid card number';
         }
-        return num.substring(0,4) + '-' + num.substring(4,8) + '-' + num.substring(8,12) + '-' + num.substring(12,16);
+        if (num.length === 16){
+            return num.substring(0,4) + '-' + num.substring(4,8) + '-' + num.substring(8,12) + '-' + num.substring(12,16);
+        }else if (num.length === 12){
+            return num.substring(0,4) + '-' + num.substring(4,8) + '-' + num.substring(8,12);
+        }else{
+            return 'Card must be 12 or 16 digits long';
+        }
     }
 
     render() {
@@ -76,23 +88,6 @@ class Checkout extends Component {
 
                 <div className='clCartHeader'>
                     <h1>Checkout</h1>
-                </div>
-
-                <div className='clCheckoutSection'>
-                    <div className='clCheckoutWrapperRight'>
-                        <div>
-                            <h1>Subtotal</h1>
-                            <h1>Tax</h1>
-                            <h1>Shipping</h1>
-                            <h3>Order Total</h3>
-                        </div>
-                        <div>
-                            <h1>${subTotal}</h1>
-                            <h1>${(subTotal * .065).toFixed(2)}</h1>
-                            <h1>$0.00</h1>
-                            <h3>${(subTotal * 1.065).toFixed(2)}</h3>
-                        </div>
-                    </div>
                 </div>
 
                 <div className='info'>
@@ -113,10 +108,30 @@ class Checkout extends Component {
                 </div>
 
                 <div className='checkoutSummary'>
-                    <p>ORDER SUMMARY</p>
+                    <h2>COST SUMMARY</h2>
+                    <div className='clCheckoutSection'>
+                        <div className='clCheckoutWrapperRight'>
+                            <div>
+                                <h1>Subtotal</h1>
+                                <h1>Tax</h1>
+                                <h1>Shipping</h1>
+                                <h3>Order Total</h3>
+                            </div>
+                            <div>
+                                <h1>${subTotal}</h1>
+                                <h1>${(subTotal * .065).toFixed(2)}</h1>
+                                <h1>$0.00</h1>
+                                <h3>${(subTotal * 1.065).toFixed(2)}</h3>
+                            </div>
+                        </div>
+                    </div>
+
+                    <h2>SHIPPING SUMMARY</h2>
                     <p>To: <span>{this.state.name}</span></p>
                     <p>Shipping Address: <span>{this.state.streetAddress}</span></p>
                     <p>City, State, Zip: <span>{this.state.city}, {this.state.state} {this.state.zip}</span></p>
+
+                    <h2>PAYMENT SUMMARY</h2>
                     <p>Name On Card: <span>{this.state.nameOnCard}</span></p>
                     <p>Card Number: <span>{this.formatCardNum(this.state.cardNumber)}</span></p>
                     <p>Expiration Date: <span>{this.state.cardExpires}</span></p>

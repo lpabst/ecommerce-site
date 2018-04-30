@@ -15,7 +15,7 @@ export default function MainFooter(){
                     <div>
                        <h3>About</h3> 
                        <Link to='/about'>Our Story</Link>
-                       <Link to='/about'>Contact Us</Link>
+                       <Link to='/support'>Contact Us</Link>
                        <Link to='/about'>Careers</Link>
                     </div>
                 </div>
