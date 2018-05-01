@@ -24,7 +24,8 @@
     width: 300px;
     height: auto;
     padding: 30px 10px;
-    background: rgb(47, 108, 187);
+    background: #333;
+    color: #ddd;
     box-shadow: 2px 2px 3px black;
     font-size: 12px;
     margin: 0 auto;

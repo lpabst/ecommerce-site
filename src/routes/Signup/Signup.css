@@ -2,6 +2,8 @@
 .signupPageContent{
     min-height: calc(100vh - 120px);
     padding: 50px 20px;
+    background: url('./../../media/truck.jpg')center no-repeat;
+    background-size: cover;
 }
 
 .signupModal{
@@ -11,6 +13,7 @@
     border-radius: 5px;
     box-shadow: 2px 2px 4px black;
     margin: 0 auto;
+    background: #fff;
 }
 
 .signupModal h1{
