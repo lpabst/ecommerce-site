@@ -36,6 +36,7 @@ app.get('/api/getProducts', mainController.getProducts);
 app.get('/api/getProductsInCart', mainController.getProductsInCart);
 app.post('/api/addToCart', mainController.addToCart);
 app.post('/api/addProduct', mainController.addProduct);
+app.post('/api/adjustQuantity', mainController.adjustQuantity);
 app.delete('/api/deleteProduct', mainController.deleteProduct);
 app.patch('/api/updateProduct', mainController.updateProduct);
 

@@ -61,6 +61,24 @@ var mainController = {
         }).catch(err=>{});
     },
 
+    adjustQuantity: (req, res) => {
+        const db = req.app.get('db');   
+
+        if (!req.session.user){
+            return res.status(200).send({error: true, message: 'Must be logged in to edit your cart'});
+        }     
+
+        let {quantity, productid, userid} = req.body;
+
+        db.adjustQuantity([quantity, productid, userid])
+        .then( updated => {
+            return res.status(200).send({error: false, message: 'Success'});
+        })
+        .catch( err => {
+            return res.status(200).send({error: true, message: 'Unexpected error', err: err});
+        })
+    },
+
     addProduct: function(req, res){
         const db = req.app.get('db');
         
