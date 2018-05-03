@@ -46,12 +46,43 @@
   width: 53%;
 }
 
+.clCart2Remove{
+  border: 1px solid black;
+  color: rgb(240, 59, 59);
+  text-align: center;
+  cursor: pointer;
+  padding: 3px 3px;
+  margin-left: 10px;
+  border-radius: 2px;
+  box-shadow: 1px 1px 3px black;
+}
+
 .clCart3{
   width: 10%;
 }
 
 .clCart4{
   width: 15%;
+  position: relative;
+  padding-left: 18px;
+}
+  
+.clCart4Plus{
+  position: absolute;
+  top: -6px;
+  left: 0px;
+  font-size: 16px;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+.clCart4Minus{
+  position: absolute;
+  top: 6px;
+  left: 2px;
+  font-size: 16px;
+  font-weight: bold;
+  cursor: pointer;
 }
 
 .clCart5{
@@ -159,6 +190,10 @@
   
   .clCart2{
     width: 20%;
+  }
+
+  .clCart2Remove{
+    display: none;
   }
   
   .clCart3{

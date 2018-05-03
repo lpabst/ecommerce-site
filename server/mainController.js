@@ -61,6 +61,36 @@ var mainController = {
         }).catch(err=>{});
     },
 
+    adjustQuantity: (req, res) => {
+        const db = req.app.get('db');   
+
+        if (!req.session.user){
+            return res.status(200).send({error: true, message: 'Must be logged in to edit your cart'});
+        }     
+
+        let {quantity, productid, userid} = req.body;
+
+        if (quantity > 0){
+            // update quantity in cart
+            db.adjustQuantity([quantity, productid, userid])
+            .then( updated => {
+                return res.status(200).send({error: false, message: 'Success'});
+            })
+            .catch( err => {
+                return res.status(200).send({error: true, message: 'Unexpected error', err: err});
+            })
+        }else{
+            // delete product from user's cart altogether
+            db.deleteProductFromUsersCart([productid, userid])
+            .then( deleted => {
+                return res.status(200).send({error: false, message: 'Success'});
+            })
+            .catch( err => {
+                return res.status(200).send({error: true, message: 'Unexpected error', err: err});
+            })
+        }
+    },
+
     addProduct: function(req, res){
         const db = req.app.get('db');
         
@@ -84,7 +114,7 @@ var mainController = {
         if(req.session.isAdmin === false || !req.session.isAdmin){
             return res.status(200).send( 'This function requires being logged in as an admin.' )
         }
-        db.deleteProductFromCart([req.query.productID])
+        db.deleteProductFromEveryonesCart([req.query.productID])
         .then( product => {
         }).catch(err=>{});
 
