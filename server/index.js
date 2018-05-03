@@ -27,6 +27,7 @@ app.use(express.static(__dirname + './../build'));
 /******************** Controllers / Endpoints for the front end **********************/
 const accountController = require('./accountController.js');
 app.get('/api/isAdmin', accountController.isAdmin);
+app.get('/api/isLoggedIn', accountController.isLoggedIn);
 app.post('/api/login', accountController.login);
 app.post('/api/createAccount', accountController.createAccount);
 

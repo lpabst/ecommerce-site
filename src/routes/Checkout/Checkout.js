@@ -24,6 +24,7 @@ class Checkout extends Component {
 
         this.getProductsInCart = this.getProductsInCart.bind(this);
         this.placeOrder = this.placeOrder.bind(this);
+        this.validateFields = this.validateFields.bind(this);
     }
 
     componentDidMount() {
@@ -53,9 +54,75 @@ class Checkout extends Component {
     }
 
     placeOrder(){
-        // Perform payment with Stripe
-        // Clear User's cart in the DB
-        // navigate user to a thank you / payment confirmation page
+        axios.get('/api/isLoggedIn')
+        .then( res => {
+            
+            if (!res.data || !res.data.isLoggedIn){
+                return alert('Please login to place an order');
+            }
+
+            let fieldsAreValid = this.validateFields();
+    
+            if (!fieldsAreValid){
+                // this.validateFields alerts the user as to the problem, so here we can just return to end the function
+                return;
+            }
+            
+            // Perform payment with Stripe
+            // Clear User's cart in the DB
+            // navigate user to a thank you / payment confirmation page
+        })
+        .catch(err => {
+            alert('Unexpected Error, please try again later')
+        });
+    }
+
+    validateFields(){
+        let {name, streetAddress, city, state, zip, nameOnCard, cardNumber, cardExpires, cardSecurityCode} = this.state;
+        let visaPattern = /^4[0-9]{12}(?:[0-9]{3})?$/;
+        let masterCardPattern = /^(?:5[1-5][0-9]{2}|222[1-9]|22[3-9][0-9]|2[3-6][0-9]{2}|27[01][0-9]|2720)[0-9]{12}$/;
+        let discoverCardPattern = /^6(?:011|5[0-9]{2})[0-9]{12}$/;
+        let amexPattern = /^3[47][0-9]{13}$/;
+
+        if (!name || !streetAddress || !city || !state || !zip || !nameOnCard || !cardNumber || !cardExpires || !cardSecurityCode){
+            alert('Some fields were left blank. Please fill out all fields before submitting');
+            return false;
+        }
+        if (!zip.match(/^\d{5}$/)){
+            alert('Zip code is not valid');
+            return false;
+        }
+        if (!cardNumber.match(visaPattern) && !cardNumber.match(masterCardPattern) 
+        && !cardNumber.match(discoverCardPattern) && !cardNumber.match(amexPattern)){
+            alert('Card number is not valid');
+            return false;
+        }
+        if (!cardExpires.match(/^\d{2}\/\d{4}$/)){
+            alert('Expiration date is not valid');
+            return false;
+        }else{
+            let arr = cardExpires.split('/');
+            let month = arr[0] ? parseInt(arr[0],10) : 0;
+            let year = arr[1] ? parseInt(arr[1],10) : 0;
+
+            let today  = new Date();
+            let nowMonth = today.getMonth() + 1;
+            let nowYear = today.getFullYear();
+
+            if (year < nowYear){
+                alert('Card is expired');
+                return false;
+            }else if(year === nowYear && month < nowMonth){
+                alert('Card is expired');
+                return false;
+            }
+        }
+        if (!cardSecurityCode.match(/^\d{3}$/)){
+            alert('Card CVV security code is not valid. This is a 3 digit number found on the back of your card.');
+            return false;
+        }
+
+        return true;
     }
 
     // Validates and formats credit card number
@@ -103,7 +170,7 @@ class Checkout extends Component {
                     <p>Payment Info</p>
                     <input placeholder='Name on card' value={this.state.nameOnCard} onChange={(e)=>this.setState({nameOnCard: e.target.value})} />
                     <input placeholder='Card Number' value={this.state.cardNumber} onChange={(e)=>this.setState({cardNumber: e.target.value})} />
-                    <input placeholder='Expiration Date' value={this.state.cardExpires} onChange={(e)=>this.setState({cardExpires: e.target.value})} />
+                    <input placeholder='Expiration Date - MM/YYYY' value={this.state.cardExpires} onChange={(e)=>this.setState({cardExpires: e.target.value})} />
                     <input placeholder='3 Digit Card Security Code' value={this.state.cardSecurityCode} onChange={(e)=>this.setState({cardSecurityCode: e.target.value})} />
                 </div>
 
@@ -139,7 +206,7 @@ class Checkout extends Component {
                 </div>
 
                 <div className='submitPaymentDiv'>
-                    <button className='submitPaymentBtn' onClick={()=>this.placeOrder} >Place Order</button>
+                    <button className='submitPaymentBtn' onClick={()=>this.placeOrder()} >Place Order</button>
                 </div>
 
                 <MainFooter />
