@@ -31,11 +31,11 @@ class CartLanding extends Component {
   }
 
   // adjusts quantity in cart up or down 1 depending on what the user clicks (+/-), then updates the DB
-  adjustQuantity(i, incrementer){
+  adjustQuantity(i, incrementer, removeFromUsersCart){
     let productsInCart = JSON.parse(JSON.stringify(this.state.productsInCart));
     let newProductInfo = productsInCart[i];
-    newProductInfo.quantity += incrementer;
-    
+    newProductInfo.quantity = removeFromUsersCart ? 0 : newProductInfo.quantity + incrementer;
+
     axios.post('/api/adjustQuantity', newProductInfo)
     .then( res => {
       if (!res.data || res.data.error){
@@ -45,7 +45,6 @@ class CartLanding extends Component {
       }
     })
     .catch(err => console.log(err));
-
   }
 
   // remove $ and commas, then multiply price*qnt and return it formatted for the locale
@@ -82,12 +81,17 @@ class CartLanding extends Component {
             <div  className='clCart1' >
               <img src={product.image} alt=""/>
             </div>
-            <div className='clCart2' >{product.title}</div>
+            <div className='clCart2' >
+              <p>
+                {product.title}
+                <span className='clCart2Remove' onClick={()=>this.adjustQuantity(i, null, true)} >Remove From Cart</span>
+              </p>
+            </div>
             <div className='clCart3' >${product.price}</div>
             <div className='clCart4' >
               <p>{product.quantity}</p>
-              <p onClick={()=>this.adjustQuantity(i, 1)} >+</p>
-              <p onClick={()=>this.adjustQuantity(i, -1)} >-</p>
+              <p className='clCart4Plus' onClick={()=>this.adjustQuantity(i, 1, false)} >+</p>
+              <p className='clCart4Minus' onClick={()=>this.adjustQuantity(i, -1, false)} >-</p>
             </div>
             <div className='clCart5' >${(total.toFixed(2)).toLocaleString()}</div>
           </div>          
