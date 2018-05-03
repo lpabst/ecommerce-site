@@ -7,6 +7,11 @@ var accountController = {
         return res.status(200).send({isAdmin: isAdmin});
     },
 
+    isLoggedIn: (req, res) => {
+        let isLoggedIn = (req.session && req.session.isLoggedIn) ? true : false;
+        return res.status(200).send({isLoggedIn: isLoggedIn});
+    },
+
     login: function(req, res){
         
         const db = req.app.get('db');
