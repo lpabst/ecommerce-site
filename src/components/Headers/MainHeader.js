@@ -6,10 +6,13 @@ import './MainHeader.css';
 import LoginLanding from './../Login/LoginLanding.js';
 import arrow from './../../media/arrow_snap_icon2.png';
 import hamMenu from './../../media/hamMenu.png';
+import LoginPopover from './../Popovers/LoginPopover.js';
 
 window.mainHeaderState = {
     isAdmin: false,
-    showLogin: false,
+    showLoginPopover: false,
+    showLogoutPopover:false,
+    showSignUpPopover:false,
     userName: '',
     showMobileDropdown: false
 }
@@ -39,7 +42,7 @@ class MainHeader extends Component {
 
     updateShowLogin(){
         this.setState({
-            showLogin: !this.state.showLogin
+            showLoginPopover: !this.state.showLoginPopover
         })
     }
 
@@ -93,10 +96,20 @@ class MainHeader extends Component {
                         <img className={`aLink searchGlass`} src="https://maxcdn.icons8.com/Share/icon/p1em/Very_Basic//search1600.png" alt="" />
                     </div>
                 </div>
-                <LoginLanding   showLogin={this.state.showLogin}
-                                updateIsAdmin={this.updateIsAdmin}
-                                updateShowLogin={this.updateShowLogin}
-                                updateCart={updateCart} />
+                { this.state.showLoginPopover &&
+                    <LoginPopover   
+                        showLogin={this.state.showLogin}
+                        updateIsAdmin={this.updateIsAdmin}
+                        updateShowLogin={this.updateShowLogin}
+                        updateCart={updateCart} 
+                    />
+                    // <LoginPopover   
+                    //     showLogin={this.state.showLogin}
+                    //     updateIsAdmin={this.updateIsAdmin}
+                    //     updateShowLogin={this.updateShowLogin}
+                    //     updateCart={updateCart} 
+                    // />
+                }
             </section>
         );
     }
