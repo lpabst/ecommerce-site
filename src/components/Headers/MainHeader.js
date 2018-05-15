@@ -4,7 +4,7 @@ import axios from 'axios';
 import './MainHeader.css';
 
 import LoginLanding from './../Login/LoginLanding.js';
-import arrow from './../../media/arrow.png';
+import arrow from './../../media/arrow_snap_icon2.png';
 import hamMenu from './../../media/hamMenu.png';
 
 window.mainHeaderState = {

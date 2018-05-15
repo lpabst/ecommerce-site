@@ -3,9 +3,9 @@
     background: #444;
 }
 .pfhContentWrapper{
-    width: 95%;
-    max-width: 1500px;
+    max-width: 1300px;
     margin: 0 auto;
+    width: 90%;
 }
 .pfhContentWrapper ul{
     padding: 10px;
